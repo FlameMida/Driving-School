@@ -60,23 +60,6 @@ definitions:
       username:
         type: string
     type: object
-  config.Qiniu:
-    properties:
-      accessKey:
-        type: string
-      bucket:
-        type: string
-      imgPath:
-        type: string
-      secretKey:
-        type: string
-      useCdnDomains:
-        type: boolean
-      useHttps:
-        type: boolean
-      zone:
-        type: string
-    type: object
   config.Redis:
     properties:
       addr:
