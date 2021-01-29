@@ -34,6 +34,7 @@ require (
 	github.com/onsi/gomega v1.4.3 // indirect
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/pkg/errors v0.9.1
+	github.com/qiniu/api.v7/v7 v7.8.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/shirou/gopsutil v2.20.8+incompatible
 	github.com/spf13/afero v1.5.1 // indirect
