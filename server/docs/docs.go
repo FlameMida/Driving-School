@@ -2622,32 +2622,6 @@ var doc = `{
                 }
             }
         },
-        "config.Qiniu": {
-            "type": "object",
-            "properties": {
-                "accessKey": {
-                    "type": "string"
-                },
-                "bucket": {
-                    "type": "string"
-                },
-                "imgPath": {
-                    "type": "string"
-                },
-                "secretKey": {
-                    "type": "string"
-                },
-                "useCdnDomains": {
-                    "type": "boolean"
-                },
-                "useHttps": {
-                    "type": "boolean"
-                },
-                "zone": {
-                    "type": "string"
-                }
-            }
-        },
         "config.Redis": {
             "type": "object",
             "properties": {
