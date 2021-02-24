@@ -2,7 +2,7 @@
 
 # jwt configuration
 jwt:
-  signing-key: 'qmPlus'
+  signing-key: 'Driving'
   expires-time: 604800
   buffer-time: 86400
 

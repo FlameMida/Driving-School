@@ -20,10 +20,10 @@ import (
 // @Router /menu/getMenu [post]
 func GetMenu(c *gin.Context) {
 	if err, menus := service.GetMenuTree(getUserAuthorityId(c)); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("获取菜单失败!", zap.Any("err", err))
+		response.FailWithMessage("获取菜单失败", c)
 	} else {
-		response.OkWithDetailed(response.SysMenusResponse{Menus: menus}, "获取成功", c)
+		response.OkWithDetailed(response.SysMenusResponse{Menus: menus}, "获取菜单成功", c)
 	}
 }
 
@@ -36,10 +36,10 @@ func GetMenu(c *gin.Context) {
 // @Router /menu/getBaseMenuTree [post]
 func GetBaseMenuTree(c *gin.Context) {
 	if err, menus := service.GetBaseMenuTree(); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("获取菜单树失败!", zap.Any("err", err))
+		response.FailWithMessage("获取菜单树失败", c)
 	} else {
-		response.OkWithDetailed(response.SysBaseMenusResponse{Menus: menus}, "获取成功", c)
+		response.OkWithDetailed(response.SysBaseMenusResponse{Menus: menus}, "获取菜单树成功", c)
 	}
 }
 
