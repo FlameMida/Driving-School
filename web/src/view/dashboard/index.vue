@@ -27,31 +27,37 @@
         <el-col :xs="24" :lg='8' :md="8">
           <div class="car-right">
             <el-row>
-              <el-col :span="8"
-                ><div class="car-item">
-                  <span class="flow"><i class="el-icon-s-grid"></i></span>
-                  <span>今日流量 </span>
-                  <b>13260</b>
-                </div></el-col
-              >
-              <el-col :span="8"
-                ><div class="car-item">
+              <el-col :span="8">
+                <el-card shadow="hover">
+                  <div class="car-item">
+                    <span class="flow"><i class="el-icon-s-grid"></i></span>
+                    <span>今日流量：</span>
+                    <b>13260</b>
+                  </div>
+                </el-card>
+              </el-col>
+
+              <el-col :span="8">
+                <el-card shadow="hover"><div class="car-item">
                   <span class="user-number">
                     <i class="el-icon-s-custom"></i>
                   </span>
-                  <span>总用户 </span>
+                  <span>总用户：</span>
                   <b>48286</b>
-                </div></el-col
-              >
-              <el-col :span="8"
-                ><div class="car-item">
+                </div>
+                </el-card>
+              </el-col>
+              <el-col :span="8">
+                <el-card shadow="hover">
+                  <div class="car-item">
                   <span class="feedback">
                     <i class="el-icon-star-on"></i>
                   </span>
-                  <span>好评率 </span>
+                  <span>好评率：</span>
                   <b>98%</b>
-                </div></el-col
-              >
+                </div>
+                </el-card>
+              </el-col>
             </el-row>
           </div>
         </el-col>
@@ -59,13 +65,7 @@
     </el-row>
     <el-row>
       <el-card shadow="hover">
-          <h2>
-            使用教学：<a style="color:#409EFF"  target="view_window" href="https://www.bilibili.com/video/BV1fV411y7dT/">https://www.bilibili.com/video/BV1fV411y7dT/</a>
-          </h2>
-          <br>
-          <h2>
-            工作流教学：<a style="color:#409EFF"  target="view_window" href="https://www.bilibili.com/video/BV1Ka411F7Ji/">https://www.bilibili.com/video/BV1Ka411F7Ji/</a>
-          </h2>
+
           <div></div>
       </el-card>
     </el-row>
@@ -86,25 +86,30 @@
       </el-row>
     </div>
     <div class="bottom">
-      <el-row :gutter="32">
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="chart-player">
-            <musicPlayer />
-          </div>
-        </el-col>
-        <el-col :xs="24" :sm="24" :lg="12">
-          <div class="chart-player">
-            <todo-list />
-          </div>
-        </el-col>
-      </el-row>
+<!--      <el-row :gutter="32">-->
+<!--        <el-col :xs="24" :sm="24" :lg="12">-->
+<!--          <div class="chart-player">-->
+<!--            <musicPlayer />-->
+<!--          </div>-->
+<!--        </el-col>-->
+<!--        <el-col :xs="24" :sm="24" :lg="12">-->
+<!--          <div class="chart-player">-->
+<!--            <todo-list />-->
+<!--          </div>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+      <state></state>
+    </div>
+    <div>
+
     </div>
   </div>
 </template>
 
 <script>
-import musicPlayer from "./component/musicPlayer";
-import TodoList from "./component/todoList";
+import state from "../system/state.vue"
+// import musicPlayer from "./component/musicPlayer";
+// import TodoList from "./component/todoList";
 import { mapGetters } from "vuex";
 export default {
   name: "Dashboard",
@@ -154,8 +159,9 @@ export default {
     ...mapGetters("user", ["userInfo"]),
   },
   components: {
-    musicPlayer, //音乐播放器
-    TodoList, //TodoList
+    state,
+    // musicPlayer, //音乐播放器
+    // TodoList, //TodoList
     // RaddarChart, //雷达图
     // stackMap, //堆叠图
     // Sunburst, //旭日图

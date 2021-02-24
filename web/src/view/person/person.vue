@@ -19,13 +19,13 @@
                    <i class="el-icon-user"></i>{{userInfo.nickName}}
                 </li>
                 <li>
-                  <i class="el-icon-data-analysis"></i>北京反转极光科技有限公司-技术部-前端事业群
+                  <i class="el-icon-data-analysis"></i>广东培正学院
                 </li>
                 <li>
-                  <i class="el-icon-video-camera-solid"></i>中国·北京市·朝阳区
+                  <i class="el-icon-video-camera-solid"></i>中国·广东·广州市
                 </li>
                 <li>
-                  <i class="el-icon-medal-1"></i>goLang/JavaScript/Vue/Gorm
+                  <i class="el-icon-medal-1"></i>Golang/JavaScript/Vue/Gorm
                 </li>
               </ul>
             </div>
@@ -37,27 +37,6 @@
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="账号绑定" name="second">
               <ul>
-                <li>
-                  <p class="title">密保手机</p>
-                  <p class="desc">
-                    已绑定手机:1245678910
-                    <a href="#">立即修改</a>
-                  </p>
-                </li>
-                <li>
-                  <p class="title">密保邮箱</p>
-                  <p class="desc">
-                    已绑定邮箱：driving-school@gmail.com
-                    <a href="#">立即修改</a>
-                  </p>
-                </li>
-                <li>
-                  <p class="title">密保问题</p>
-                  <p class="desc">
-                    未设置密保问题
-                    <a href="#">去设置</a>
-                  </p>
-                </li>
                 <li>
                   <p class="title">修改密码</p>
                   <p class="desc">

@@ -4,6 +4,7 @@ import (
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/mem"
+	"math"
 	"runtime"
 	"time"
 )
@@ -77,6 +78,9 @@ func InitCPU() (c Cpu, err error) {
 	if cpus, err := cpu.Percent(time.Duration(200)*time.Millisecond, true); err != nil {
 		return c, err
 	} else {
+		for k, v := range cpus {
+			cpus[k] = math.Floor(v)
+		}
 		c.Cpus = cpus
 	}
 	return c, nil
