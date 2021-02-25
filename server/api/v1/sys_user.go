@@ -69,6 +69,7 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 			Token:     token,
 			ExpiresAt: claims.StandardClaims.ExpiresAt * 1000,
 		}, "登录成功", c)
+		global.GVA_REDIS.Incr("activeUsers")
 		return
 	}
 	if err, jwtStr := service.GetRedisJWT(user.Username); err == redis.Nil {

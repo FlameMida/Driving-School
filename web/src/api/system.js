@@ -41,3 +41,17 @@ export const getSystemState = () => {
         donNotShowLoading: true
     });
 };
+
+// @Tags system
+// @Summary 获取仪表板统计信息
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"返回成功"}"
+// @Router /system/getDashboardInfo [post]
+export const getDashboardState = () => {
+    return service({
+        url: "/system/getDashboardInfo",
+        method: "post",
+        donNotShowLoading: true
+    });
+};

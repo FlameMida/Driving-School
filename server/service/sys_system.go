@@ -56,3 +56,24 @@ func GetServerInfo() (server *utils.Server, err error) {
 
 	return &s, nil
 }
+
+//@author: FlameMida
+//@function: GetDashboardInfo
+//@description: 获取仪表板信息
+//@return: info string, msg string
+
+func GetDashboardInfo() (dashboard *utils.DashBoard, err error) {
+	var d utils.DashBoard
+	d.TimeInfo, d.TimeMsg = utils.InitTimeInfo()
+	if global.GVA_REDIS.Exists("activeUsers").Val() > 0 {
+		if d.ActiveUsers, err = global.GVA_REDIS.Get("activeUsers").Result(); err != nil {
+			global.GVA_LOG.Error("d.ActiveUsers redis get Failed!", zap.String("err", err.Error()))
+			return &d, err
+		}
+	} else {
+		d.ActiveUsers = "0"
+	}
+	rows := global.GVA_DB.Find(&model.SysUser{}).RowsAffected
+	d.TotalUsers = int(rows)
+	return &d, nil
+}

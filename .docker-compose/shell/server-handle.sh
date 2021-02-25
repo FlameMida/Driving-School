@@ -15,7 +15,7 @@ jwt:
 zap:
   level: 'info'
   format: 'console'
-  prefix: '[GIN-VUE-ADMIN]'
+  prefix: '[Driving-School]'
   director: 'log'
   link-name: 'latest_log'
   show-line: true

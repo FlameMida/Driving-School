@@ -17,7 +17,7 @@ export const toLowerCase = (str) => {
 
 // 驼峰转换下划线
 export const toSQLLine = (str) => {
-    if (str == "ID") return "ID"
+    if (str === "ID") return "ID"
     return str.replace(/([A-Z])/g, "_$1").toLowerCase();
 }
 
