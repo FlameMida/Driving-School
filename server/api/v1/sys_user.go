@@ -78,6 +78,7 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 			response.FailWithMessage("设置登录状态失败", c)
 			return
 		}
+		global.GVA_REDIS.Incr("activeUsers")
 		response.OkWithDetailed(response.LoginResponse{
 			User:      user,
 			Token:     token,
@@ -97,6 +98,7 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 			response.FailWithMessage("设置登录状态失败", c)
 			return
 		}
+		global.GVA_REDIS.Incr("activeUsers")
 		response.OkWithDetailed(response.LoginResponse{
 			User:      user,
 			Token:     token,
@@ -160,9 +162,9 @@ func ChangePassword(c *gin.Context) {
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /user/getUserList [post]
 func GetUserList(c *gin.Context) {
-	var pageInfo request.PageInfo
+	var pageInfo request.UserSearch
 	_ = c.ShouldBindJSON(&pageInfo)
-	if err := utils.Verify(pageInfo, utils.PageInfoVerify); err != nil {
+	if err := utils.Verify(pageInfo.PageInfo, utils.PageInfoVerify); err != nil {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}

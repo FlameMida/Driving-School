@@ -60,11 +60,22 @@ func ChangePassword(u *model.SysUser, newPassword string) (err error, userInter 
 //@param: info request.PageInfo
 //@return: err error, list interface{}, total int64
 
-func GetUserInfoList(info request.PageInfo) (err error, list interface{}, total int64) {
+func GetUserInfoList(info request.UserSearch) (err error, list interface{}, total int64) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
 	db := global.GVA_DB.Model(&model.SysUser{})
 	var userList []model.SysUser
+	// 如果有条件搜索 下方会自动创建搜索语句
+	if info.Username != "" {
+		db = db.Where("`username` LIKE ?", "%"+info.Username+"%")
+	}
+	if info.NickName != "" {
+		db = db.Where("`nick_name` LIKE ?", "%"+info.NickName+"%")
+	}
+	if info.AuthorityId != "" {
+		db = db.Where("`authority_id` = ?", info.AuthorityId)
+	}
+
 	err = db.Count(&total).Error
 	err = db.Limit(limit).Offset(offset).Preload("Authority").Find(&userList).Error
 	return err, userList, total

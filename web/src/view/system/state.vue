@@ -54,7 +54,7 @@
                 </el-slider>
               </el-col>
             </el-row>
-            <el-row  :gutter="10">
+            <el-row :gutter="10">
               <el-col :span="24" style="padding-bottom: 16px">
                 核心使用情况 ：
               </el-col>
@@ -159,6 +159,7 @@ export default {
   name: "State",
   data() {
     return {
+      code: 0,
       marks: {
         1: '1',
         2: '2',
@@ -181,9 +182,11 @@ export default {
   },
   created() {
     this.reload();
-    this.timer = setInterval(() => {
-      this.reload();
-    }, 1000 * 10);
+    if (this.code !== 7) {
+      this.timer = setInterval(() => {
+        this.reload();
+      }, 1000 * 10);
+    }
   },
   beforeDestroy() {
     clearInterval(this.timer)
@@ -191,7 +194,12 @@ export default {
   },
   methods: {
     async reload() {
-      const {data} = await getSystemState();
+      this.code = 0
+      const {code, data} = await getSystemState();
+      if (code === 7) {
+        this.code = 7
+        clearInterval(this.timer)
+      }
       this.state = data.server;
     },
   },
