@@ -2,18 +2,18 @@
   <div class="big">
     <el-row>
       <div class="card">
-        <el-col :xs="24" :lg="16" :md="16" >
+        <el-col :xs="24" :lg="16" :md="16">
           <div class="car-left">
             <el-row>
               <div>
                 <el-col :xs="4" :md="3" :lg="3">
                   <span class="card-img">
-                    <img :src="userInfo.headerImg" alt="" />
+                    <img :src="userInfo.headerImg" alt=""/>
                   </span>
                 </el-col>
                 <el-col :xs="20" :lg="12" :md="12">
                   <div class="text">
-                    <h4>早安，管理员， 请开始您一天的工作吧！</h4>
+                    <h4><span>{{ TimeInfo }}</span>，{{ userInfo.authority.authorityName }}，{{ TimeMsg }}</h4>
                     <p class="tips-text">
                       <i class="el-icon-sunny el-icon"></i>
                       <span>今日晴，0℃ - 10℃，天气寒冷，注意添加衣物。</span>
@@ -32,19 +32,20 @@
                   <div class="car-item">
                     <span class="flow"><i class="el-icon-s-grid"></i></span>
                     <span>今日流量：</span>
-                    <b>13260</b>
+                    <b>{{ ActiveUsers }}</b>
                   </div>
                 </el-card>
               </el-col>
 
               <el-col :span="8">
-                <el-card shadow="hover"><div class="car-item">
+                <el-card shadow="hover">
+                  <div class="car-item">
                   <span class="user-number">
                     <i class="el-icon-s-custom"></i>
                   </span>
-                  <span>总用户：</span>
-                  <b>48286</b>
-                </div>
+                    <span>总用户：</span>
+                    <b>{{ TotalUsers }}</b>
+                  </div>
                 </el-card>
               </el-col>
               <el-col :span="8">
@@ -53,9 +54,9 @@
                   <span class="feedback">
                     <i class="el-icon-star-on"></i>
                   </span>
-                  <span>好评率：</span>
-                  <b>98%</b>
-                </div>
+                    <span>学员数：</span>
+                    <b>{{ TotalStudents }}</b>
+                  </div>
                 </el-card>
               </el-col>
             </el-row>
@@ -66,17 +67,17 @@
     <el-row>
       <el-card shadow="hover">
 
-          <div></div>
+        <div></div>
       </el-card>
     </el-row>
     <div class="shadow">
       <el-row :gutter="20">
         <el-col
-          :span="4"
-          v-for="(card, key) in toolCards"
-          :key="key"
-          @click.native="toTarget(card.name)"
-          :xs="8"
+            :span="4"
+            v-for="(card, key) in toolCards"
+            :key="key"
+            @click.native="toTarget(card.name)"
+            :xs="8"
         >
           <el-card shadow="hover" class="grid-content">
             <i :class="card.icon" :style="{ color: card.color }"></i>
@@ -86,18 +87,18 @@
       </el-row>
     </div>
     <div class="bottom">
-<!--      <el-row :gutter="32">-->
-<!--        <el-col :xs="24" :sm="24" :lg="12">-->
-<!--          <div class="chart-player">-->
-<!--            <musicPlayer />-->
-<!--          </div>-->
-<!--        </el-col>-->
-<!--        <el-col :xs="24" :sm="24" :lg="12">-->
-<!--          <div class="chart-player">-->
-<!--            <todo-list />-->
-<!--          </div>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
+      <!--      <el-row :gutter="32">-->
+      <!--        <el-col :xs="24" :sm="24" :lg="12">-->
+      <!--          <div class="chart-player">-->
+      <!--            <musicPlayer />-->
+      <!--          </div>-->
+      <!--        </el-col>-->
+      <!--        <el-col :xs="24" :sm="24" :lg="12">-->
+      <!--          <div class="chart-player">-->
+      <!--            <todo-list />-->
+      <!--          </div>-->
+      <!--        </el-col>-->
+      <!--      </el-row>-->
       <state></state>
     </div>
     <div>
@@ -110,11 +111,29 @@
 import state from "../system/state.vue"
 // import musicPlayer from "./component/musicPlayer";
 // import TodoList from "./component/todoList";
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
+import {getDashboardState} from "@/api/system";
+
 export default {
   name: "Dashboard",
+  created() {
+    this.reloadDashBoard();
+    this.timer = setInterval(() => {
+      this.reloadDashBoard();
+    }, 1000 * 1800);
+  }, beforeDestroy() {
+    clearInterval(this.timer)
+    this.timer = null
+  },
   data() {
     return {
+      timer: null,
+      TimeInfo: "欢迎 ",
+      TimeMsg: "进入管理面板~",
+      ActiveUsers: "0",
+      TotalUsers: "0",
+      TotalStudents: "0",
+      TotalCoach: "0",
       toolCards: [
         {
           label: "用户管理",
@@ -168,7 +187,15 @@ export default {
   },
   methods: {
     toTarget(name) {
-      this.$router.push({ name });
+      this.$router.push({name});
+    },
+    async reloadDashBoard() {
+      const {data} = await getDashboardState();
+      this.TimeInfo = data.dashboard.time_info;
+      this.TimeMsg = data.dashboard.time_msg;
+      this.ActiveUsers = data.dashboard.active_users;
+      this.TotalUsers = data.dashboard.total_users;
+      this.TotalStudents = data.dashboard.total_students;
     },
   },
 };
@@ -180,11 +207,13 @@ export default {
   padding-top: 0;
   background-color: rgb(243, 243, 243);
   padding-top: 15px;
+
   .top {
     width: 100%;
     height: 360px;
     margin-top: 20px;
     overflow: hidden;
+
     .chart-container {
       position: relative;
       width: 100%;
@@ -193,9 +222,11 @@ export default {
       background-color: #fff;
     }
   }
+
   .mid {
     width: 100%;
     height: 380px;
+
     .chart-wrapper {
       height: 340px;
       background: #fff;
@@ -203,6 +234,7 @@ export default {
       margin-bottom: 32px;
     }
   }
+
   .bottom {
     width: 100%;
     height: 300px;
@@ -210,6 +242,7 @@ export default {
     .el-row {
       margin-right: 4px !important;
     }
+
     .chart-player {
       width: 100%;
       height: 270px;

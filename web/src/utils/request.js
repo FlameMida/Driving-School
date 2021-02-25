@@ -62,7 +62,7 @@ service.interceptors.response.use(
         if (response.headers["new-token"]) {
             store.commit('user/setToken', response.headers["new-token"])
         }
-        if (response.data.code == 0 || response.headers.success === "true") {
+        if (response.data.code === 0 || response.headers.success === "true") {
             return response.data
         } else {
             Message({

@@ -77,3 +77,20 @@ func GetServerInfo(c *gin.Context) {
 	}
 
 }
+
+// @Tags System
+// @Summary 获取仪表板信息
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /system/getDashboardInfo [post]
+func GetDashboardInfo(c *gin.Context) {
+	if dashboard, err := service.GetDashboardInfo(); err != nil {
+		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
+		response.FailWithMessage("获取失败", c)
+		return
+	} else {
+		response.OkWithDetailed(gin.H{"dashboard": dashboard}, "获取成功", c)
+	}
+
+}
