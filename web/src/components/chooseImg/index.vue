@@ -15,7 +15,7 @@
     </div>
   </el-drawer>
 </template>
-
+<!-- TODO:改造上传功能-->
 <script>
 const path = process.env.VUE_APP_BASE_API
 import { getFileList } from "@/api/fileUploadAndDownload";

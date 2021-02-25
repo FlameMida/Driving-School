@@ -97,6 +97,7 @@
         </el-form-item>
         <el-form-item label="头像" label-width="80px">
           <div style="display:inline-block" @click="openHeaderChange">
+            <!-- TODO:url错误-->
             <img class="header-img-box" v-if="userInfo.headerImg" :src="'api'+userInfo.headerImg" />
             <div v-else class="header-img-box">从媒体库选择</div>
           </div>
