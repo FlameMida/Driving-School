@@ -196,6 +196,7 @@ export default {
       this.ActiveUsers = data.dashboard.active_users;
       this.TotalUsers = data.dashboard.total_users;
       this.TotalStudents = data.dashboard.total_students;
+
     },
   },
 };

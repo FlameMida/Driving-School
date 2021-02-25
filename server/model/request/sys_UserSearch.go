@@ -2,7 +2,7 @@ package request
 
 import "Driving-school/model"
 
-type SysDictionarySearch struct {
-	model.SysDictionary
+type UserSearch struct {
+	model.SysUser
 	PageInfo
 }
