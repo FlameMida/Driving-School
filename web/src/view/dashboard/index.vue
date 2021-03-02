@@ -87,18 +87,18 @@
       </el-row>
     </div>
     <div class="bottom">
-      <!--      <el-row :gutter="32">-->
-      <!--        <el-col :xs="24" :sm="24" :lg="12">-->
-      <!--          <div class="chart-player">-->
-      <!--            <musicPlayer />-->
-      <!--          </div>-->
-      <!--        </el-col>-->
-      <!--        <el-col :xs="24" :sm="24" :lg="12">-->
-      <!--          <div class="chart-player">-->
-      <!--            <todo-list />-->
-      <!--          </div>-->
-      <!--        </el-col>-->
-      <!--      </el-row>-->
+      <el-row :gutter="32">
+        <el-col :xs="24" :sm="24" :lg="12">
+          <div class="chart-player">
+            <musicPlayer/>
+          </div>
+        </el-col>
+        <!--        <el-col :xs="24" :sm="24" :lg="12">-->
+        <!--          <div class="chart-player">-->
+        <!--            <todo-list />-->
+        <!--          </div>-->
+        <!--        </el-col>-->
+      </el-row>
       <state></state>
     </div>
     <div>
@@ -109,7 +109,7 @@
 
 <script>
 import state from "../system/state.vue"
-// import musicPlayer from "./component/musicPlayer";
+import musicPlayer from "./component/musicPlayer";
 // import TodoList from "./component/todoList";
 import {mapGetters} from "vuex";
 import {getDashboardState} from "@/api/system";
@@ -179,7 +179,7 @@ export default {
   },
   components: {
     state,
-    // musicPlayer, //音乐播放器
+    musicPlayer, //音乐播放器
     // TodoList, //TodoList
     // RaddarChart, //雷达图
     // stackMap, //堆叠图

@@ -11,6 +11,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
+	"github.com/golang-module/carbon"
 	"go.uber.org/zap"
 	"time"
 )
@@ -44,6 +45,14 @@ func Login(c *gin.Context) {
 // 登录以后签发jwt
 func tokenNext(c *gin.Context, user model.SysUser) {
 	j := &middleware.JWT{SigningKey: []byte(global.GVA_CONFIG.JWT.SigningKey)} // 唯一签名
+	user.HasServerInfo = false
+	path := service.GetPolicyPathByAuthorityId(user.AuthorityId)
+	for _, info := range path {
+		if info.Path == "/system/getServerInfo" {
+			user.HasServerInfo = true
+		}
+	}
+
 	claims := request.CustomClaims{
 		UUID:        user.UUID,
 		ID:          user.ID,
@@ -54,7 +63,7 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 		StandardClaims: jwt.StandardClaims{
 			NotBefore: time.Now().Unix() - 1000,                              // 签名生效时间
 			ExpiresAt: time.Now().Unix() + global.GVA_CONFIG.JWT.ExpiresTime, // 过期时间 7天  配置文件
-			Issuer:    "qmPlus",                                              // 签名的发行者
+			Issuer:    "FlameMida",                                           // 签名的发行者
 		},
 	}
 	token, err := j.CreateToken(claims)
@@ -63,22 +72,24 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 		response.FailWithMessage("获取token失败", c)
 		return
 	}
+	date := carbon.Now().ToDateString()
+	//不开启Redis的情况
 	if !global.GVA_CONFIG.System.UseMultipoint {
 		response.OkWithDetailed(response.LoginResponse{
 			User:      user,
 			Token:     token,
 			ExpiresAt: claims.StandardClaims.ExpiresAt * 1000,
 		}, "登录成功", c)
-		global.GVA_REDIS.Incr("activeUsers")
 		return
 	}
+	//开启Redis的情况
 	if err, jwtStr := service.GetRedisJWT(user.Username); err == redis.Nil {
 		if err := service.SetRedisJWT(token, user.Username); err != nil {
 			global.GVA_LOG.Error("设置登录状态失败", zap.Any("err", err))
 			response.FailWithMessage("设置登录状态失败", c)
 			return
 		}
-		global.GVA_REDIS.Incr("activeUsers")
+		global.GVA_REDIS.Incr(date + "activeUsers")
 		response.OkWithDetailed(response.LoginResponse{
 			User:      user,
 			Token:     token,
@@ -98,7 +109,7 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 			response.FailWithMessage("设置登录状态失败", c)
 			return
 		}
-		global.GVA_REDIS.Incr("activeUsers")
+		global.GVA_REDIS.Incr(date + "activeUsers")
 		response.OkWithDetailed(response.LoginResponse{
 			User:      user,
 			Token:     token,

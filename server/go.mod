@@ -1,6 +1,6 @@
 module Driving-school
 
-go 1.15
+go 1.16
 
 require (
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
@@ -19,6 +19,7 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/golang-module/carbon v1.3.3
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/gookit/color v1.3.6
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
@@ -34,7 +35,6 @@ require (
 	github.com/onsi/gomega v1.4.3 // indirect
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/pkg/errors v0.9.1
-	github.com/qiniu/api.v7/v7 v7.8.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/shirou/gopsutil v2.20.8+incompatible
 	github.com/spf13/afero v1.5.1 // indirect

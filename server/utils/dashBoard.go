@@ -1,6 +1,10 @@
 package utils
 
-import "time"
+import (
+	"Driving-school/global"
+	"github.com/golang-module/carbon"
+	"time"
+)
 
 type DashBoard struct {
 	TimeInfo      string `json:"time_info"`
@@ -29,4 +33,15 @@ func InitTimeInfo() (info string, msg string) {
 		msg = "祝您今夜好梦~！"
 	}
 	return info, msg
+}
+
+func InitActiveUserInfo() (num string, err error) {
+	date := carbon.Now().ToDateString()
+	if global.GVA_REDIS.Exists(date+"activeUsers").Val() > 0 {
+		num, err = global.GVA_REDIS.Get(date + "activeUsers").Result()
+		return num, err
+	} else {
+		return "0", nil
+	}
+
 }

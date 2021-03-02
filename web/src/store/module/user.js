@@ -37,7 +37,7 @@ export const user = {
     actions: {
         async LoginIn({ commit, dispatch, rootGetters, getters }, loginInfo) {
             const res = await login(loginInfo)
-            if (res.code == 0) {
+            if (res.code === 0) {
                 commit('setUserInfo', res.data.user)
                 commit('setToken', res.data.token)
                 await dispatch('router/SetAsyncRouter', {}, { root: true })
@@ -54,7 +54,7 @@ export const user = {
         },
         async LoginOut({ commit }) {
             const res = await jsonInBlacklist()
-            if (res.code == 0) {
+            if (res.code === 0) {
                 commit("LoginOut")
             }
         }
