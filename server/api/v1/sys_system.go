@@ -5,6 +5,7 @@ import (
 	"Driving-school/model"
 	"Driving-school/model/response"
 	"Driving-school/service"
+	"Driving-school/utils"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -91,6 +92,23 @@ func GetDashboardInfo(c *gin.Context) {
 		return
 	} else {
 		response.OkWithDetailed(gin.H{"dashboard": dashboard}, "获取成功", c)
+	}
+
+}
+
+// @Tags System
+// @Summary 获取播放器音乐列表
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /system/getMusic [post]
+func GetMusic(c *gin.Context) {
+	if music, err := utils.GetTopList(); err != nil {
+		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
+		response.FailWithMessage("获取失败", c)
+		return
+	} else {
+		response.OkWithDetailed(gin.H{"music": music}, "获取成功", c)
 	}
 
 }

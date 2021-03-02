@@ -87,8 +87,8 @@
       </el-row>
     </div>
     <div class="bottom">
-      <el-row :gutter="32">
-        <el-col :xs="24" :sm="24" :lg="12">
+      <el-row :gutter="24">
+        <el-col :xs="24" :sm="24" :lg="24">
           <div class="chart-player">
             <musicPlayer/>
           </div>

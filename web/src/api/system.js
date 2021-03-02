@@ -55,3 +55,17 @@ export const getDashboardState = () => {
         donNotShowLoading: true
     });
 };
+
+// @Tags system
+// @Summary 获取音乐列表
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"返回成功"}"
+// @Router /base/Music [post]
+export const getMusic = () => {
+    return service({
+        url: "/base/music",
+        method: "post",
+        donNotShowLoading: true
+    });
+};
