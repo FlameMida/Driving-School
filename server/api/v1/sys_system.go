@@ -1,13 +1,17 @@
 package v1
 
 import (
+	"Driving-school/config"
 	"Driving-school/global"
 	"Driving-school/model"
 	"Driving-school/model/response"
 	"Driving-school/service"
 	"Driving-school/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"net/http"
+	"time"
 )
 
 // @Tags System
@@ -109,6 +113,52 @@ func GetMusic(c *gin.Context) {
 		return
 	} else {
 		response.OkWithDetailed(gin.H{"music": music}, "获取成功", c)
+	}
+
+}
+
+// @Tags System
+// @Summary 获取天气状况
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /system/GetWeather [post]
+func GetWeather(c *gin.Context) {
+	var loc config.Location
+	_ = c.ShouldBindJSON(&loc)
+	if loc.Log == "" || loc.Lat == "" {
+		loc.Log = global.GVA_CONFIG.Weather.Log
+		loc.Lat = global.GVA_CONFIG.Weather.Lat
+	}
+	appKey := global.GVA_CONFIG.Weather.AppKey
+	units := global.GVA_CONFIG.Weather.Units
+	lang := global.GVA_CONFIG.Weather.Lang
+	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&lang=%s&units=%s&exclude=%s", loc.Lat, loc.Log, appKey, lang, units, "minutely,hourly,daily,alerts")
+	if global.GVA_CONFIG.System.UseMultipoint {
+		if global.GVA_REDIS.Exists("weather").Val() > 0 {
+			response.OkWithDetailed(gin.H{"weather": global.GVA_REDIS.Get("weather").Val()}, "获取成功", c)
+		} else {
+			body, err := http.Get(url)
+			if err != nil {
+				global.GVA_LOG.Error("fail to fetch weather", zap.Any("err", err))
+				response.FailWithMessage("获取失败", c)
+				return
+			} else {
+				strings := utils.ProcessBody(body)
+				global.GVA_REDIS.Set("weather", strings, time.Minute)
+				response.OkWithDetailed(gin.H{"weather": strings}, "获取成功", c)
+			}
+		}
+	} else {
+		body, err := http.Get(url)
+		if err != nil {
+			global.GVA_LOG.Error("fail to fetch weather", zap.Any("err", err))
+			response.FailWithMessage("获取失败", c)
+			return
+		} else {
+			strings := utils.ProcessBody(body)
+			response.OkWithDetailed(gin.H{"weather": strings}, "获取成功", c)
+		}
 	}
 
 }

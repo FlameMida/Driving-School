@@ -11,7 +11,6 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
-	"github.com/golang-module/carbon"
 	"go.uber.org/zap"
 	"time"
 )
@@ -72,7 +71,7 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 		response.FailWithMessage("获取token失败", c)
 		return
 	}
-	date := carbon.Now().ToDateString()
+
 	//不开启Redis的情况
 	if !global.GVA_CONFIG.System.UseMultipoint {
 		response.OkWithDetailed(response.LoginResponse{
@@ -89,7 +88,8 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 			response.FailWithMessage("设置登录状态失败", c)
 			return
 		}
-		global.GVA_REDIS.Incr(date + "activeUsers")
+
+		utils.CountingUser()
 		response.OkWithDetailed(response.LoginResponse{
 			User:      user,
 			Token:     token,
@@ -109,7 +109,7 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 			response.FailWithMessage("设置登录状态失败", c)
 			return
 		}
-		global.GVA_REDIS.Incr(date + "activeUsers")
+		utils.CountingUser()
 		response.OkWithDetailed(response.LoginResponse{
 			User:      user,
 			Token:     token,

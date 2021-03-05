@@ -11,5 +11,6 @@ type Server struct {
 	// gorm
 	Mysql Mysql `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
 	// oss
-	Local Local `mapstructure:"local" json:"local" yaml:"local"`
+	Local   Local   `mapstructure:"local" json:"local" yaml:"local"`
+	Weather Weather `mapstructure:"weather" json:"weather" yaml:"weather"`
 }

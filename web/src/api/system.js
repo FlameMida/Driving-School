@@ -69,3 +69,17 @@ export const getMusic = () => {
         donNotShowLoading: true
     });
 };
+// @Tags system
+// @Summary 获天气信息
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"返回成功"}"
+// @Router /base/getWeather [post]
+export const getWeather = (data) => {
+    return service({
+        url: "/base/getWeather",
+        method: "post",
+        data,
+        donNotShowLoading: true
+    });
+};

@@ -1,5 +1,11 @@
 # Gin-Vue-Admin Global Configuration
-
+# weather configuration
+weather:
+  app-key: "712b2beeefce88cbf02710a81b5013bb"
+  lang: "zh_cn"
+  lat: "23.4155"
+  log: "113.0968"
+  units: "metric"
 # jwt configuration
 jwt:
   signing-key: 'Driving'
