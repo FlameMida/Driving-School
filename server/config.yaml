@@ -1,5 +1,7 @@
 # Gin-Vue-Admin Global Configuration
-# weather configuration
+
+# weather configuration https://openweathermap.org/api/one-call-api#data
+
 weather:
   app-key: "712b2beeefce88cbf02710a81b5013bb"
   lang: "zh_cn"
