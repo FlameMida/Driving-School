@@ -37,8 +37,8 @@ func InitTimeInfo() (info string, msg string) {
 
 func InitActiveUserInfo() (num string, err error) {
 	date := carbon.Now().ToDateString()
-	if global.GVA_REDIS.Exists(date+"activeUsers").Val() > 0 {
-		num, err = global.GVA_REDIS.Get(date + "activeUsers").Result()
+	if global.GVA_REDIS.Exists(date+"-activeUsers").Val() > 0 {
+		num, err = global.GVA_REDIS.Get(date + "-activeUsers").Result()
 		return num, err
 	} else {
 		return "0", nil

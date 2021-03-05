@@ -20,12 +20,12 @@ Vue.config.productionTip = false
 import Bus from '@/utils/bus.js'
 Vue.use(Bus)
 
-import APlayer from 'vue-aplayer';
-//
-Vue.use(APlayer, {
-    defaultCover: 'https://github.com/u3u.png',
-    productionTip: true,
-});
+// import APlayer from 'vue-aplayer';
+// //
+// Vue.use(APlayer, {
+//     defaultCover: 'https://github.com/u3u.png',
+//     productionTip: true,
+// });
 
 
 import { auth } from '@/directive/auth'

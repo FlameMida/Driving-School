@@ -16,7 +16,7 @@
                     <h4><span>{{ TimeInfo }}</span>，{{ userInfo.authority.authorityName }}，{{ TimeMsg }}</h4>
                     <p class="tips-text">
                       <i class="el-icon-sunny el-icon"></i>
-                      <span>今日晴，0℃ - 10℃，天气寒冷，注意添加衣物。</span>
+                      <span>当前天气为 {{ weather }} ，气温 {{ temp }} ℃。</span>
                     </p>
                   </div>
                 </el-col>
@@ -112,7 +112,7 @@ import state from "../system/state.vue"
 import musicPlayer from "./component/musicPlayer";
 // import TodoList from "./component/todoList";
 import {mapGetters} from "vuex";
-import {getDashboardState} from "@/api/system";
+import {getDashboardState, getWeather} from "@/api/system";
 
 export default {
   name: "Dashboard",
@@ -121,12 +121,20 @@ export default {
     this.timer = setInterval(() => {
       this.reloadDashBoard();
     }, 1000 * 1800);
-  }, beforeDestroy() {
+  },
+  mounted() {
+    this.getLocation();
+  },
+  beforeDestroy() {
     clearInterval(this.timer)
     this.timer = null
   },
   data() {
     return {
+      weather: "晴",
+      temp: "24",
+      latitude: 0,
+      longitude: 0,
       timer: null,
       TimeInfo: "欢迎 ",
       TimeMsg: "进入管理面板~",
@@ -186,6 +194,29 @@ export default {
     // Sunburst, //旭日图
   },
   methods: {
+    getLocation() {
+      let log, lat
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+              log = position.coords.longitude
+              lat = position.coords.latitude
+            },
+            function (e) {
+              throw(e.message);
+            }
+        )
+        this.loadWeather(log, lat)
+      }
+
+    },
+    async loadWeather(lat, log) {
+      const {data} = await getWeather(lat, log)
+      let weather = JSON.parse(data.weather)
+      this.weather = weather.current.weather[0].description
+      this.temp = weather.current.temp
+
+    },
     toTarget(name) {
       this.$router.push({name});
     },

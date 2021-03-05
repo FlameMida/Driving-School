@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"Driving-school/global"
+	"github.com/golang-module/carbon"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/mem"
@@ -118,4 +120,13 @@ func InitDisk() (d Disk, err error) {
 		d.UsedPercent = int(u.UsedPercent)
 	}
 	return d, nil
+}
+
+func CountingUser() {
+	date := carbon.Now().ToDateString()
+	if global.GVA_REDIS.Exists(date+"-activeUsers").Val() > 0 {
+		global.GVA_REDIS.Incr(date + "-activeUsers")
+	} else {
+		global.GVA_REDIS.Set(date+"-activeUsers", 1, time.Hour*24)
+	}
 }

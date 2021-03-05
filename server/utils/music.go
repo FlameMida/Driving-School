@@ -81,10 +81,13 @@ func requests(url string) (text string, err error) {
 	requests.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36")
 	res, _ := client.Do(requests)
 	defer res.Body.Close()
-
-	buf := new(bytes.Buffer)
-	_, _ = buf.ReadFrom(res.Body)
-	text = buf.String()
+	text = ProcessBody(res)
 	return text, nil
 
+}
+
+func ProcessBody(response *http.Response) string {
+	buf := new(bytes.Buffer)
+	_, _ = buf.ReadFrom(response.Body)
+	return buf.String()
 }
