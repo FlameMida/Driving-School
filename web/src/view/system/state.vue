@@ -161,7 +161,6 @@ export default {
   name: "State",
   data() {
     return {
-      code: 0,
       marks: {
         1: '1',
         2: '2',
@@ -199,7 +198,6 @@ export default {
   },
   methods: {
     async reload() {
-      this.code = 0
       const {data} = await getSystemState();
       this.Sys_state = data.server;
     },

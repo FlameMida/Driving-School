@@ -47,10 +47,10 @@ export const getSystemState = () => {
 // @Security ApiKeyAuth
 // @Produce  application/json
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"返回成功"}"
-// @Router /system/getDashboardInfo [post]
+// @Router /base/getDashboardInfo [post]
 export const getDashboardState = () => {
     return service({
-        url: "/system/getDashboardInfo",
+        url: "/base/getDashboardInfo",
         method: "post",
         donNotShowLoading: true
     });

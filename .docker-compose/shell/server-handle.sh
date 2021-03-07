@@ -9,7 +9,9 @@ cat>"${filename}"<<EOF
 
 # jwt configuration
 jwt:
-  signing-key: 'qmPlus'
+  signing-key: 'Driving'
+  expires-time: 604800
+  buffer-time: 86400
 
 # zap logger configuration
 zap:
@@ -67,6 +69,7 @@ mysql:
   max-idle-conns: 10
   max-open-conns: 10
   log-mode: false
+  log-zap: ""
 
 # local configuration
 local:

@@ -173,9 +173,9 @@ func ChangePassword(c *gin.Context) {
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /user/getUserList [post]
 func GetUserList(c *gin.Context) {
-	var pageInfo request.UserSearch
+	var pageInfo request.PageInfo
 	_ = c.ShouldBindJSON(&pageInfo)
-	if err := utils.Verify(pageInfo.PageInfo, utils.PageInfoVerify); err != nil {
+	if err := utils.Verify(pageInfo, utils.PageInfoVerify); err != nil {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}

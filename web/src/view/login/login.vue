@@ -79,7 +79,7 @@
           /></a>
         </div>
         <div class="copyright">
-          Copyright &copy; {{ curYear }} 💖FlameMida
+          Copyright &copy; {{ curYear }} 💖 FlameMida
         </div>
       </div>
     </div>
