@@ -107,7 +107,7 @@
 <script>
 import { getDict } from "@/utils/dictionary";
 import { toSQLLine , toLowerCase } from "@/utils/stringFun.js";
-import { getSysDictionaryList } from "@/api/sysDictionary";
+// import { getSysDictionaryList } from "@/api/sysDictionary";
 export default {
   name: "FieldDialog",
   props: {
@@ -201,14 +201,14 @@ export default {
       }
     }
   },
-  async created() {
-    const dictRes = await getSysDictionaryList({
-      page: 1,
-      pageSize: 999999
-    });
-
-    this.dictOptions = dictRes.data.list
-  },
+  // async created() {
+  //   const dictRes = await getSysDictionaryList({
+  //     page: 1,
+  //     pageSize: 999999
+  //   });
+  //
+  //   this.dictOptions = dictRes.data.list
+  // },
 };
 </script>
 <style lang="scss">

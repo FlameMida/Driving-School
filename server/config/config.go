@@ -13,4 +13,5 @@ type Server struct {
 	// oss
 	Local   Local   `mapstructure:"local" json:"local" yaml:"local"`
 	Weather Weather `mapstructure:"weather" json:"weather" yaml:"weather"`
+	Excel   Excel   `mapstructure:"excel" json:"excel" yaml:"excel"`
 }

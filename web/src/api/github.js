@@ -17,16 +17,3 @@ service.interceptors.response.use((resp) => {
     return error;
 });
 
-export function Commits(page) {
-    return service({
-        url: ""+page,
-        method: "get",
-    });
-}
-
-export function Members() {
-    return service({
-        url: "members",
-        method: "get",
-    });
-}

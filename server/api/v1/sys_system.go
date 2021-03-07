@@ -7,6 +7,11 @@ import (
 	"Driving-school/model/response"
 	"Driving-school/service"
 	"Driving-school/utils"
+	"os"
+	"os/exec"
+	"runtime"
+	"strconv"
+
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -52,18 +57,23 @@ func SetSystemConfig(c *gin.Context) {
 // @Summary 重启系统
 // @Security ApiKeyAuth
 // @Produce  application/json
-// @Param data body model.System true "重启系统"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"重启系统成功"}"
-// @Router /system/ReloadSystem [post]
+// @Success 200 {string} string "{"code":0,"data":{},"msg":"重启系统成功"}"
+// @Router /system/reloadSystem [post]
 func ReloadSystem(c *gin.Context) {
-	var sys model.System
-	_ = c.ShouldBindJSON(&sys)
-	if err := service.SetSystemConfig(sys); err != nil {
+	if runtime.GOOS == "windows" {
+		response.FailWithMessage("系统不支持", c)
+		return
+	}
+	pid := os.Getpid()
+	cmd := exec.Command("kill", "-1", strconv.Itoa(pid))
+	err := cmd.Run()
+	if err != nil {
 		global.GVA_LOG.Error("重启系统失败!", zap.Any("err", err))
 		response.FailWithMessage("重启系统失败", c)
-	} else {
-		response.OkWithMessage("重启系统成功", c)
+		return
 	}
+	response.OkWithMessage("重启系统成功", c)
+	return
 }
 
 // @Tags System
@@ -88,7 +98,7 @@ func GetServerInfo(c *gin.Context) {
 // @Security ApiKeyAuth
 // @Produce  application/json
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /system/getDashboardInfo [post]
+// @Router /base/getDashboardInfo [post]
 func GetDashboardInfo(c *gin.Context) {
 	if dashboard, err := service.GetDashboardInfo(); err != nil {
 		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
