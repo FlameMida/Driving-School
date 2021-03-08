@@ -8,7 +8,6 @@ import (
 	"gorm.io/gorm"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateApi
 //@description: 新增基础api
 //@param: api model.SysApi
@@ -21,7 +20,6 @@ func CreateApi(api model.SysApi) (err error) {
 	return global.GVA_DB.Create(&api).Error
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteApi
 //@description: 删除基础api
 //@param: api model.SysApi
@@ -33,7 +31,6 @@ func DeleteApi(api model.SysApi) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetAPIInfoList
 //@description: 分页获取数据,
 //@param: api model.SysApi, info request.PageInfo, order string, desc bool
@@ -82,7 +79,6 @@ func GetAPIInfoList(api model.SysApi, info request.PageInfo, order string, desc 
 	return err, apiList, total
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetAllApis
 //@description: 获取所有的api
 //@return: err error, apis []model.SysApi
@@ -92,7 +88,6 @@ func GetAllApis() (err error, apis []model.SysApi) {
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetApiById
 //@description: 根据id获取api
 //@param: id float64
@@ -103,7 +98,6 @@ func GetApiById(id float64) (err error, api model.SysApi) {
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UpdateApi
 //@description: 根据id更新api
 //@param: api model.SysApi

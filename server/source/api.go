@@ -99,7 +99,6 @@ var apis = []model.SysApi{
 	{global.GVA_MODEL{ID: 84, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/excel/downloadTemplate", "下载excel模板", "excel", "GET"},
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: sys_apis 表数据初始化
 func (a *api) Init() error {
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {

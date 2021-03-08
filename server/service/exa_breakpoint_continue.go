@@ -7,7 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: FindOrCreateFile
 //@description: 上传文件时检测当前文件属性，如果没有文件则创建，有则返回文件的当前切片
 //@param: fileMd5 string, fileName string, chunkTotal int
@@ -29,7 +28,6 @@ func FindOrCreateFile(fileMd5 string, fileName string, chunkTotal int) (err erro
 	return err, cfile
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateFileChunk
 //@description: 创建文件切片记录
 //@param: id uint, fileChunkPath string, fileChunkNumber int
@@ -44,7 +42,6 @@ func CreateFileChunk(id uint, fileChunkPath string, fileChunkNumber int) error {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteFileChunk
 //@description: 删除文件切片记录
 //@param: fileMd5 string, fileName string, filePath string

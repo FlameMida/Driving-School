@@ -10,7 +10,6 @@ import (
 	"strconv"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateAuthority
 //@description: 创建一个角色
 //@param: auth model.SysAuthority
@@ -25,7 +24,6 @@ func CreateAuthority(auth model.SysAuthority) (err error, authority model.SysAut
 	return err, auth
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CopyAuthority
 //@description: 复制一个角色
 //@param: copyInfo response.SysAuthorityCopyResponse
@@ -55,7 +53,6 @@ func CopyAuthority(copyInfo response.SysAuthorityCopyResponse) (err error, autho
 	return err, copyInfo.Authority
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UpdateAuthority
 //@description: 更改一个角色
 //@param: auth model.SysAuthority
@@ -66,7 +63,6 @@ func UpdateAuthority(auth model.SysAuthority) (err error, authority model.SysAut
 	return err, auth
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteAuthority
 //@description: 删除角色
 //@param: auth *model.SysAuthority
@@ -91,7 +87,6 @@ func DeleteAuthority(auth *model.SysAuthority) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetAuthorityInfoList
 //@description: 分页获取数据
 //@param: info request.PageInfo
@@ -111,7 +106,6 @@ func GetAuthorityInfoList(info request.PageInfo) (err error, list interface{}, t
 	return err, authority, total
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetAuthorityInfo
 //@description: 获取所有角色信息
 //@param: auth model.SysAuthority
@@ -122,7 +116,6 @@ func GetAuthorityInfo(auth model.SysAuthority) (err error, sa model.SysAuthority
 	return err, sa
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: SetDataAuthority
 //@description: 设置角色资源权限
 //@param: auth model.SysAuthority
@@ -135,7 +128,6 @@ func SetDataAuthority(auth model.SysAuthority) error {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: SetMenuAuthority
 //@description: 菜单与角色绑定
 //@param: auth *model.SysAuthority
@@ -148,7 +140,6 @@ func SetMenuAuthority(auth *model.SysAuthority) error {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: findChildrenAuthority
 //@description: 查询子角色
 //@param: authority *model.SysAuthority

@@ -17,7 +17,6 @@ var files = []model.ExaFileUploadAndDownload{
 	{global.GVA_MODEL{ID: 2, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "logo.png", "http://qmplusimg.henrongyi.top/1576554439myAvatar.png", "png", "1587973709logo.png"},
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: exa_file_upload_and_downloads 表初始化数据
 func (f *file) Init() error {
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {

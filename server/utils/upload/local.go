@@ -15,9 +15,6 @@ import (
 
 type Local struct{}
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@author: [ccfish86](https://github.com/ccfish86)
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@object: *Local
 //@function: UploadFile
 //@description: 上传文件
@@ -64,9 +61,6 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 	return p, filename, nil
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@author: [ccfish86](https://github.com/ccfish86)
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@object: *Local
 //@function: DeleteFile
 //@description: 删除文件

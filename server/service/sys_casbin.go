@@ -12,7 +12,6 @@ import (
 	"strings"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UpdateCasbin
 //@description: 更新casbin权限
 //@param: authorityId string, casbinInfos []request.CasbinInfo
@@ -38,7 +37,6 @@ func UpdateCasbin(authorityId string, casbinInfos []request.CasbinInfo) error {
 	return nil
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UpdateCasbinApi
 //@description: API更新随动
 //@param: oldPath string, newPath string, oldMethod string, newMethod string
@@ -52,7 +50,6 @@ func UpdateCasbinApi(oldPath string, newPath string, oldMethod string, newMethod
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetPolicyPathByAuthorityId
 //@description: 获取权限列表
 //@param: authorityId string
@@ -70,7 +67,6 @@ func GetPolicyPathByAuthorityId(authorityId string) (pathMaps []request.CasbinIn
 	return pathMaps
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: ClearCasbin
 //@description: 清除匹配的权限
 //@param: v int, p ...string
@@ -83,7 +79,6 @@ func ClearCasbin(v int, p ...string) bool {
 
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: Casbin
 //@description: 持久化到数据库  引入自定义规则
 //@return: *casbin.Enforcer
@@ -97,7 +92,6 @@ func Casbin() *casbin.Enforcer {
 	return e
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: ParamsMatch
 //@description: 自定义规则函数
 //@param: fullNameKey1 string, key2 string
@@ -109,7 +103,6 @@ func ParamsMatch(fullNameKey1 string, key2 string) bool {
 	return util.KeyMatch2(key1, key2)
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: ParamsMatchFunc
 //@description: 自定义规则函数
 //@param: args ...interface{}

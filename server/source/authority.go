@@ -14,12 +14,12 @@ var Authority = new(authority)
 type authority struct{}
 
 var authorities = []model.SysAuthority{
-	{CreatedAt: time.Now(), UpdatedAt: time.Now(), AuthorityId: "888", AuthorityName: "普通用户", ParentId: "0", DefaultRouter: "dashboard"},
-	{CreatedAt: time.Now(), UpdatedAt: time.Now(), AuthorityId: "8881", AuthorityName: "普通用户子角色", ParentId: "888", DefaultRouter: "dashboard"},
-	{CreatedAt: time.Now(), UpdatedAt: time.Now(), AuthorityId: "9528", AuthorityName: "测试角色", ParentId: "0", DefaultRouter: "dashboard"},
+	{CreatedAt: time.Now(), UpdatedAt: time.Now(), AuthorityId: "888", AuthorityName: "超级管理员", ParentId: "0", DefaultRouter: "dashboard"},
+	{CreatedAt: time.Now(), UpdatedAt: time.Now(), AuthorityId: "8881", AuthorityName: "管理员", ParentId: "888", DefaultRouter: "dashboard"},
+	{CreatedAt: time.Now(), UpdatedAt: time.Now(), AuthorityId: "100", AuthorityName: "教练", ParentId: "0", DefaultRouter: "dashboard"},
+	{CreatedAt: time.Now(), UpdatedAt: time.Now(), AuthorityId: "200", AuthorityName: "学员", ParentId: "0", DefaultRouter: "dashboard"},
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: sys_authorities 表数据初始化
 func (a *authority) Init() error {
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {

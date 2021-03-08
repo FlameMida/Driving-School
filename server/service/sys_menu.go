@@ -9,7 +9,6 @@ import (
 	"strconv"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: getMenuTreeMap
 //@description: 获取路由总树map
 //@param: authorityId string
@@ -25,7 +24,6 @@ func getMenuTreeMap(authorityId string) (err error, treeMap map[string][]model.S
 	return err, treeMap
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetMenuTree
 //@description: 获取动态菜单树
 //@param: authorityId string
@@ -40,7 +38,6 @@ func GetMenuTree(authorityId string) (err error, menus []model.SysMenu) {
 	return err, menus
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: getChildrenList
 //@description: 获取子菜单
 //@param: menu *model.SysMenu, treeMap map[string][]model.SysMenu
@@ -54,7 +51,6 @@ func getChildrenList(menu *model.SysMenu, treeMap map[string][]model.SysMenu) (e
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetInfoList
 //@description: 获取路由分页
 //@return: err error, list interface{}, total int64
@@ -69,7 +65,6 @@ func GetInfoList() (err error, list interface{}, total int64) {
 	return err, menuList, total
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: getBaseChildrenList
 //@description: 获取菜单的子菜单
 //@param: menu *model.SysBaseMenu, treeMap map[string][]model.SysBaseMenu
@@ -83,7 +78,6 @@ func getBaseChildrenList(menu *model.SysBaseMenu, treeMap map[string][]model.Sys
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: AddBaseMenu
 //@description: 添加基础路由
 //@param: menu model.SysBaseMenu
@@ -96,7 +90,6 @@ func AddBaseMenu(menu model.SysBaseMenu) error {
 	return global.GVA_DB.Create(&menu).Error
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: getBaseMenuTreeMap
 //@description: 获取路由总树map
 //@return: err error, treeMap map[string][]model.SysBaseMenu
@@ -111,7 +104,6 @@ func getBaseMenuTreeMap() (err error, treeMap map[string][]model.SysBaseMenu) {
 	return err, treeMap
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetBaseMenuTree
 //@description: 获取基础路由树
 //@return: err error, menus []model.SysBaseMenu
@@ -125,7 +117,6 @@ func GetBaseMenuTree() (err error, menus []model.SysBaseMenu) {
 	return err, menus
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: AddMenuAuthority
 //@description: 为角色增加menu树
 //@param: menus []model.SysBaseMenu, authorityId string
@@ -139,7 +130,6 @@ func AddMenuAuthority(menus []model.SysBaseMenu, authorityId string) (err error)
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetMenuAuthority
 //@description: 查看当前角色树
 //@param: info *request.GetAuthorityId

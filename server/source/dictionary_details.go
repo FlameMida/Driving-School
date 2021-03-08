@@ -13,7 +13,6 @@ var DictionaryDetail = new(dictionaryDetail)
 
 type dictionaryDetail struct{}
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: dictionary_details 表数据初始化
 func (d *dictionaryDetail) Init() error {
 	var details = []model.SysDictionaryDetail{

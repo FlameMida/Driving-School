@@ -7,7 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteBaseMenu
 //@description: 删除基础路由
 //@param: id float64
@@ -30,7 +29,6 @@ func DeleteBaseMenu(id float64) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UpdateBaseMenu
 //@description: 更新路由
 //@param: menu model.SysBaseMenu
@@ -64,7 +62,7 @@ func UpdateBaseMenu(menu model.SysBaseMenu) (err error) {
 			return txErr
 		}
 		if len(menu.Parameters) > 0 {
-			for k, _ := range menu.Parameters {
+			for k := range menu.Parameters {
 				menu.Parameters[k].SysBaseMenuID = menu.ID
 			}
 			txErr = tx.Create(&menu.Parameters).Error
@@ -84,7 +82,6 @@ func UpdateBaseMenu(menu model.SysBaseMenu) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetBaseMenuById
 //@description: 返回当前选中menu
 //@param: id float64

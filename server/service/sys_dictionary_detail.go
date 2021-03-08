@@ -6,7 +6,6 @@ import (
 	"Driving-school/model/request"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateSysDictionaryDetail
 //@description: 创建字典详情数据
 //@param: sysDictionaryDetail model.SysDictionaryDetail
@@ -17,7 +16,6 @@ func CreateSysDictionaryDetail(sysDictionaryDetail model.SysDictionaryDetail) (e
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteSysDictionaryDetail
 //@description: 删除字典详情数据
 //@param: sysDictionaryDetail model.SysDictionaryDetail
@@ -28,7 +26,6 @@ func DeleteSysDictionaryDetail(sysDictionaryDetail model.SysDictionaryDetail) (e
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UpdateSysDictionaryDetail
 //@description: 更新字典详情数据
 //@param: sysDictionaryDetail *model.SysDictionaryDetail
@@ -39,7 +36,6 @@ func UpdateSysDictionaryDetail(sysDictionaryDetail *model.SysDictionaryDetail) (
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetSysDictionaryDetail
 //@description: 根据id获取字典详情单条数据
 //@param: id uint
@@ -50,7 +46,6 @@ func GetSysDictionaryDetail(id uint) (err error, sysDictionaryDetail model.SysDi
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetSysDictionaryDetailInfoList
 //@description: 分页获取字典详情列表
 //@param: info request.SysDictionaryDetailSearch

@@ -40,7 +40,6 @@ var WorkflowEndPoint = []model.WorkflowEndPoint{
 	{WorkflowEdgeID: "flow1604985881207", GVA_MODEL: global.GVA_MODEL{ID: 33, CreatedAt: time.Now(), UpdatedAt: time.Now()}, X: 517.5, Y: 302, Index: 2},
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: 工作流相关 表数据初始化
 func (w *workflow) Init() error {
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {

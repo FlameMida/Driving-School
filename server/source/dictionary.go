@@ -15,7 +15,6 @@ type dictionary struct{}
 
 var status = new(bool)
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: sys_dictionaries 表数据初始化
 func (d *dictionary) Init() error {
 	*status = true
