@@ -26,11 +26,11 @@ import (
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /system/getSystemConfig [post]
 func GetSystemConfig(c *gin.Context) {
-	if err, config := service.GetSystemConfig(); err != nil {
+	if cfg, err := service.GetSystemConfig(); err != nil {
 		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
 		response.FailWithMessage("获取失败", c)
 	} else {
-		response.OkWithDetailed(response.SysConfigResponse{Config: config}, "获取成功", c)
+		response.OkWithDetailed(response.SysConfigResponse{Config: cfg}, "获取成功", c)
 	}
 }
 
@@ -117,6 +117,7 @@ func GetDashboardInfo(c *gin.Context) {
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /system/getMusic [post]
 func GetMusic(c *gin.Context) {
+
 	if music, err := utils.GetTopList(); err != nil {
 		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
 		response.FailWithMessage("获取失败", c)

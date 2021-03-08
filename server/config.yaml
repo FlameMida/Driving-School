@@ -46,6 +46,8 @@ weather:
   lat: "23.4155"
   log: "113.0968"
   units: metric
+music:
+  list-id: "19723756"
 zap:
   director: log
   encode-level: LowercaseColorLevelEncoder

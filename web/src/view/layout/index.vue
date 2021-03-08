@@ -73,6 +73,7 @@
         <transition mode="out-in" name="el-fade-in-linear">
           <router-view v-loading="loadingFlag"  element-loading-text="正在加载中" class="admin-box" v-if="!$route.meta.keepAlive && reloadFlag"></router-view>
         </transition>
+        <musicPlayer/>
        <BottomInfo />
       </el-main>
     </el-container>
@@ -81,6 +82,7 @@
 </template>
 
 <script>
+import musicPlayer from "./component/musicPlayer";
 import Aside from '@/view/layout/aside'
 import HistoryComponent from '@/view/layout/aside/historyComponent/history'
 import Screenfull from '@/view/layout/screenfull'
@@ -103,6 +105,7 @@ export default {
     }
   },
   components: {
+    musicPlayer, //音乐播放器
     Aside,
     HistoryComponent,
     Screenfull,
@@ -191,6 +194,16 @@ export default {
 </script>
 <style lang="scss">
 @import '@/style/mobile.scss';
+
+.aplayer-fixed .aplayer-body {
+  left: 225px !important;
+  max-width: 600px !important;
+}
+
+.aplayer-withlist {
+  left: 225px !important;
+  max-width: 600px !important;
+}
 
 // $headerHigh: 52px;
 // $mainHight: 100vh;
