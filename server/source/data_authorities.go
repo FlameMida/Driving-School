@@ -19,9 +19,8 @@ type DataAuthority struct {
 var infos = []DataAuthority{
 	{"888", "888"},
 	{"888", "8881"},
-	{"888", "9528"},
-	{"9528", "8881"},
-	{"9528", "9528"},
+	{"100", "100"},
+	{"200", "200"},
 }
 
 //@description: sys_data_authority_id 表数据初始化
