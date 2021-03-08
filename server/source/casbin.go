@@ -173,7 +173,6 @@ var carbines = []gormadapter.CasbinRule{
 	{PType: "p", V0: "9528", V1: "/autoCode/createTemp", V2: "POST"},
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: casbin_rule 表数据初始化
 func (c *casbin) Init() error {
 	global.GVA_DB.AutoMigrate(gormadapter.CasbinRule{})

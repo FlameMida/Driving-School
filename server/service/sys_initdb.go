@@ -12,7 +12,6 @@ import (
 	"gorm.io/gorm"
 )
 
-//@author: [songzhibin97](https://github.com/songzhibin97)
 //@function: writeConfig
 //@description: 回写配置
 //@param:
@@ -25,7 +24,6 @@ func writeConfig(viper *viper.Viper, conf map[string]interface{}) error {
 	return viper.WriteConfig()
 }
 
-//@author: [songzhibin97](https://github.com/songzhibin97)
 //@function: createTable
 //@description: 创建数据库(mysql)
 //@param: dsn string, driver string, createSql
@@ -54,7 +52,6 @@ func initDB(InitDBFunctions ...model.InitDBFunc) (err error) {
 	return nil
 }
 
-//@author: [songzhibin97](https://github.com/songzhibin97)
 //@function: InitDB
 //@description: 创建数据库并初始化
 //@param: authorityId string

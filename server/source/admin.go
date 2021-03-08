@@ -19,7 +19,6 @@ var admins = []model.SysUser{
 	{GVA_MODEL: global.GVA_MODEL{ID: 2, CreatedAt: time.Now(), UpdatedAt: time.Now()}, UUID: uuid.NewV4(), Username: "a303176530", Password: "3ec063004a6f31642261936a379fde3d", NickName: "QMPlusUser", HeaderImg: "http://qmplusimg.henrongyi.top/1572075907logo.png", AuthorityId: "9528"},
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@description: sys_users 表数据初始化
 func (a *admin) Init() error {
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {

@@ -8,7 +8,6 @@ import (
 	"time"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: JsonInBlacklist
 //@description: 拉黑jwt
 //@param: jwtList model.JwtBlacklist
@@ -19,7 +18,6 @@ func JsonInBlacklist(jwtList model.JwtBlacklist) (err error) {
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: IsBlacklist
 //@description: 判断JWT是否在黑名单内部
 //@param: jwt string
@@ -30,7 +28,6 @@ func IsBlacklist(jwt string) bool {
 	return !isNotFound
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetRedisJWT
 //@description: 从redis取jwt
 //@param: userName string
@@ -41,7 +38,6 @@ func GetRedisJWT(userName string) (err error, redisJWT string) {
 	return err, redisJWT
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: SetRedisJWT
 //@description: jwt存入redis并设置过期时间
 //@param: userName string

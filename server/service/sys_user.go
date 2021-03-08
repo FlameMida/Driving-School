@@ -10,7 +10,6 @@ import (
 	"gorm.io/gorm"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: Register
 //@description: 用户注册
 //@param: u model.SysUser
@@ -28,7 +27,6 @@ func Register(u model.SysUser) (err error, userInter model.SysUser) {
 	return err, u
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: Login
 //@description: 用户登录
 //@param: u *model.SysUser
@@ -41,7 +39,6 @@ func Login(u *model.SysUser) (err error, userInter *model.SysUser) {
 	return err, &user
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: ChangePassword
 //@description: 修改用户密码
 //@param: u *model.SysUser, newPassword string
@@ -54,7 +51,6 @@ func ChangePassword(u *model.SysUser, newPassword string) (err error, userInter 
 	return err, u
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetUserInfoList
 //@description: 分页获取数据
 //@param: info request.PageInfo
@@ -70,7 +66,6 @@ func GetUserInfoList(info request.PageInfo) (err error, list interface{}, total 
 	return err, userList, total
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: SetUserAuthority
 //@description: 设置一个用户的权限
 //@param: uuid uuid.UUID, authorityId string
@@ -81,7 +76,6 @@ func SetUserAuthority(uuid uuid.UUID, authorityId string) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteUser
 //@description: 删除用户
 //@param: id float64
@@ -93,7 +87,6 @@ func DeleteUser(id float64) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: SetUserInfo
 //@description: 设置用户信息
 //@param: reqUser model.SysUser
@@ -104,7 +97,6 @@ func SetUserInfo(reqUser model.SysUser) (err error, user model.SysUser) {
 	return err, reqUser
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@function: FindUserById
 //@description: 通过id获取用户信息
 //@param: id int
@@ -116,7 +108,6 @@ func FindUserById(id int) (err error, user *model.SysUser) {
 	return err, &u
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@function: FindUserByUuid
 //@description: 通过uuid获取用户信息
 //@param: uuid string

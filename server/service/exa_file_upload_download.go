@@ -10,7 +10,6 @@ import (
 	"strings"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: Upload
 //@description: 创建文件上传记录
 //@param: file model.ExaFileUploadAndDownload
@@ -20,7 +19,6 @@ func Upload(file model.ExaFileUploadAndDownload) error {
 	return global.GVA_DB.Create(&file).Error
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: FindFile
 //@description: 删除文件切片记录
 //@param: id uint
@@ -32,7 +30,6 @@ func FindFile(id uint) (error, model.ExaFileUploadAndDownload) {
 	return err, file
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteFile
 //@description: 删除文件记录
 //@param: file model.ExaFileUploadAndDownload
@@ -49,7 +46,6 @@ func DeleteFile(file model.ExaFileUploadAndDownload) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetFileRecordInfoList
 //@description: 分页获取数据
 //@param: info request.PageInfo
@@ -65,7 +61,6 @@ func GetFileRecordInfoList(info request.PageInfo) (err error, list interface{}, 
 	return err, fileLists, total
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UploadFile
 //@description: 根据配置文件判断是文件上传到本地或者七牛云
 //@param: header *multipart.FileHeader, noSave string

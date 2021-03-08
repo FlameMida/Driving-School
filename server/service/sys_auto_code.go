@@ -27,7 +27,6 @@ type tplData struct {
 	autoMoveFilePath string
 }
 
-//@author: [songzhibin97](https://github.com/songzhibin97)
 //@function: PreviewTemp
 //@description: 预览创建代码
 //@param: model.AutoCodeStruct
@@ -92,7 +91,6 @@ func PreviewTemp(autoCode model.AutoCodeStruct) (map[string]string, error) {
 	return ret, nil
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateTemp
 //@description: 创建代码
 //@param: model.AutoCodeStruct
@@ -126,7 +124,7 @@ func CreateTemp(autoCode model.AutoCodeStruct) (err error) {
 		}
 	}()
 	if autoCode.AutoMoveFile { // 判断是否需要自动转移
-		for index, _ := range dataList {
+		for index := range dataList {
 			addAutoMoveFile(&dataList[index])
 		}
 		for _, value := range dataList { // 移动文件
@@ -144,7 +142,6 @@ func CreateTemp(autoCode model.AutoCodeStruct) (err error) {
 	return nil
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetAllTplFile
 //@description: 获取 pathName 文件夹下所有 tpl 文件
 //@param: pathName string, fileList []string
@@ -167,7 +164,6 @@ func GetAllTplFile(pathName string, fileList []string) ([]string, error) {
 	return fileList, err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetTables
 //@description: 获取数据库的所有表名
 //@param: pathName string
@@ -179,7 +175,6 @@ func GetTables(dbName string) (err error, TableNames []request.TableReq) {
 	return err, TableNames
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetDB
 //@description: 获取数据库的所有数据库名
 //@param: pathName string
@@ -191,7 +186,6 @@ func GetDB() (err error, DBNames []request.DBReq) {
 	return err, DBNames
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetDB
 //@description: 获取指定数据库和指定数据表的所有字段名,类型值等
 //@param: pathName string
@@ -203,8 +197,6 @@ func GetColumn(tableName string, dbName string) (err error, Columns []request.Co
 	return err, Columns
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@author: [songzhibin97](https://github.com/songzhibin97)
 //@function: addAutoMoveFile
 //@description: 生成对应的迁移文件路径
 //@param: *tplData
@@ -243,8 +235,6 @@ func addAutoMoveFile(data *tplData) {
 	}
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@author: [SliverHorn](https://github.com/SliverHorn)
 //@function: CreateApi
 //@description: 自动创建api数据,
 //@param: a *model.AutoCodeStruct

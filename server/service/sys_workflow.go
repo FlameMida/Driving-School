@@ -16,7 +16,6 @@ func getTable(businessType string) interface{} {
 	return model.WorkflowBusinessTable[businessType]()
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateWorkflowProcess
 //@description: 创建工作流相关信息
 //@param: workflowProcess model.WorkflowProcess
@@ -27,7 +26,6 @@ func CreateWorkflowProcess(workflowProcess model.WorkflowProcess) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: DeleteWorkflowProcess
 //@description: 删除工作流相关信息
 //@param: workflowProcess model.WorkflowProcess
@@ -60,7 +58,6 @@ func DeleteWorkflowProcess(workflowProcess model.WorkflowProcess) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: CreateWorkflowProcess
 //@description: 批量删除工作流信息（暂未启用）
 //@param: ids request.IdsReq
@@ -71,7 +68,6 @@ func DeleteWorkflowProcessByIds(ids request.IdsReq) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: UpdateWorkflowProcess
 //@description: 更新工作流相关信息
 //@param: workflowProcess *model.WorkflowProcess
@@ -117,7 +113,6 @@ func UpdateWorkflowProcess(workflowProcess *model.WorkflowProcess) (err error) {
 	})
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetWorkflowProcess
 //@description: 获取工作流相关信息
 //@param: id string
@@ -128,7 +123,6 @@ func GetWorkflowProcess(id string) (err error, workflowProcess model.WorkflowPro
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetWorkflowCreateStep
 //@description: 获取工作流步骤信息
 //@param: id string
@@ -139,7 +133,6 @@ func FindWorkflowStep(id string) (err error, workflowNode model.WorkflowProcess)
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetWorkflowProcessInfoList
 //@description: 获取工作流列表
 //@param: info request.WorkflowProcessSearch
@@ -163,7 +156,6 @@ func GetWorkflowProcessInfoList(info request.WorkflowProcessSearch) (err error, 
 	return err, workflowProcesss, total
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
 //@function: StartWorkflow
 //@description: 开启一个工作流
 //@param: wfInterface model.GVA_Workflow
