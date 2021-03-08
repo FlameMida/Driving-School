@@ -1,25 +1,38 @@
 package utils
 
 import (
+	"Driving-school/global"
 	"bytes"
+	"encoding/json"
 	"errors"
+	"fmt"
+	"github.com/golang-module/carbon"
 	"github.com/gurkankaymak/gosoup"
 	"net/http"
 	"regexp"
+	"time"
 )
 
-type TopList struct {
+type SongList struct {
 	Num    int    `json:"num"`
-	Title  string `json:"title"`
+	Name   string `json:"name"`
 	Id     string `json:"id"`
-	Src    string `json:"src"`
-	Pic    string `json:"pic"`
+	Url    string `json:"url"`
+	Cover  string `json:"cover"`
 	Artist string `json:"artist"`
 }
 
-func GetTopList() (List []TopList, err error) {
-	url := "http://music.163.com/discover/toplist"
-
+func GetTopList() (List []SongList, err error) {
+	ListId := global.GVA_CONFIG.Music.ListId
+	url := fmt.Sprintf("http://music.163.com/discover/toplist?id=%s", ListId)
+	KeyName := fmt.Sprintf("%s-List-%s-Music", carbon.Now().ToDateString(), ListId)
+	if global.GVA_CONFIG.System.UseMultipoint {
+		if global.GVA_REDIS.Exists(KeyName).Val() > 0 {
+			songStr := global.GVA_REDIS.Get(KeyName).Val()
+			_ = json.Unmarshal([]byte(songStr), &List)
+			return List, nil
+		}
+	}
 	//处理返回结果
 	text, err := requests(url)
 	if err != nil {
@@ -58,11 +71,15 @@ func GetTopList() (List []TopList, err error) {
 		artistRaw := picelement.Find("a", gosoup.Attributes{"class": "s-fc7"})
 		artist := artistRaw.LastChild.Data
 		src := "http://music.163.com/song/media/outer/url?id=" + id + ".mp3"
-		List = append(List, TopList{num, songName, id, src, pic, artist})
+		List = append(List, SongList{num, songName, id, src, pic, artist})
 		if count == 10 {
 			break
 		}
 		count++
+	}
+	if global.GVA_CONFIG.System.UseMultipoint {
+		rdsVal, _ := json.Marshal(List)
+		global.GVA_REDIS.Set(KeyName, rdsVal, time.Hour*24)
 	}
 	return List, nil
 

@@ -14,4 +14,5 @@ type Server struct {
 	Local   Local   `mapstructure:"local" json:"local" yaml:"local"`
 	Weather Weather `mapstructure:"weather" json:"weather" yaml:"weather"`
 	Excel   Excel   `mapstructure:"excel" json:"excel" yaml:"excel"`
+	Music   Music   `mapstructure:"music" json:"music" yaml:"music"`
 }

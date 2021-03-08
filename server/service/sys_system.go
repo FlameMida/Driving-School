@@ -13,8 +13,8 @@ import (
 //@description: 读取配置文件
 //@return: err error, conf config.Server
 
-func GetSystemConfig() (err error, conf config.Server) {
-	return nil, global.GVA_CONFIG
+func GetSystemConfig() (conf config.Server, err error) {
+	return global.GVA_CONFIG, nil
 }
 
 // @description   set system config,
