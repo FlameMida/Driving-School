@@ -25,7 +25,8 @@ type SongList struct {
 func GetTopList() (List []SongList, err error) {
 	ListId := global.GVA_CONFIG.Music.ListId
 	url := fmt.Sprintf("http://music.163.com/discover/toplist?id=%s", ListId)
-	KeyName := fmt.Sprintf("%s-List-%s-Music", carbon.Now().ToDateString(), ListId)
+	length := global.GVA_CONFIG.Music.Length
+	KeyName := fmt.Sprintf("%s-List-%s-Music-%d", carbon.Now().ToDateString(), ListId, length)
 	if global.GVA_CONFIG.System.UseMultipoint {
 		if global.GVA_REDIS.Exists(KeyName).Val() > 0 {
 			songStr := global.GVA_REDIS.Get(KeyName).Val()
@@ -50,7 +51,7 @@ func GetTopList() (List []SongList, err error) {
 	}
 	musicList := musicListRaw.FindAllByTag("a")
 	count := 1
-	length := global.GVA_CONFIG.Music.Length
+
 	for _, e := range musicList {
 
 		songName := e.LastChild.Data
