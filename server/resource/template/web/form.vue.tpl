@@ -1,17 +1,18 @@
 <template>
-<div>
-    <el-form :model="formData" label-position="right" label-width="80px">
-        {{- range .Fields}}
-             <el-form-item label="{{.FieldDesc}}:">
-          {{- if eq .FieldType "bool" }}
-                <el-switch active-color="#13ce66" inactive-color="#ff4949" active-text="是" inactive-text="否" v-model="formData.{{.FieldJson}}" clearable ></el-switch>
-          {{ end -}}
-          {{- if eq .FieldType "string" }}
-                <el-input v-model="formData.{{.FieldJson}}" clearable placeholder="请输入" ></el-input>
-          {{ end -}}
-          {{- if eq .FieldType "int" }}
-          {{- if .DictType}}
-                 <el-select v-model="formData.{{ .FieldJson }}" placeholder="请选择" clearable>
+    <div>
+        <el-form :model="formData" label-position="right" label-width="130px" size="medium">
+            {{- range .Fields}}
+            <el-form-item label="{{.FieldDesc}}:">
+                {{- if eq .FieldType "bool" }}
+                <el-switch active-color="#13ce66" inactive-color="#ff4949" active-text="是" inactive-text="否"
+                           v-model="formData.{{.FieldJson}}" clearable></el-switch>
+                {{ end -}}
+                {{- if eq .FieldType "string" }}
+                <el-input v-model="formData.{{.FieldJson}}" clearable placeholder="请输入"></el-input>
+                {{ end -}}
+                {{- if eq .FieldType "int" }}
+                {{- if .DictType}}
+                <el-select v-model="formData.{{ .FieldJson }}" placeholder="请选择" clearable>
                      <el-option v-for="(item,key) in {{ .DictType }}Options" :key="key" :label="item.label" :value="item.value"></el-option>
                  </el-select>
           {{ else -}}
@@ -36,62 +37,71 @@
 </template>
 
 <script>
-import {
-    create{{.StructName}},
-    update{{.StructName}},
-    find{{.StructName}}
-} from "@/api/{{.PackageName}}";  //  此处请自行替换地址
-import infoList from "@/mixins/infoList";
-export default {
-  name: "{{.StructName}}",
-  mixins: [infoList],
-  data() {
-    return {
-      type: "",
+    import {
+        create{{.StructName}},
+        update{{.StructName}},
+        find{{.StructName}}
+    } from "@/api/{{.PackageName}}";  //  此处请自行替换地址
+    import infoList from "@/mixins/infoList";
 
-      {{- range .Fields}}
-          {{- if .DictType }}
-      {{ .DictType }}Options:[],
-          {{ end -}}
-      {{end -}}
+    export default {
+        name: "{{.StructName}}",
+        mixins: [infoList],
+        data() {
+            return {
+                type: "",
 
-      formData: {
-            {{range .Fields}}
-            {{- if eq .FieldType "bool" -}}
-               {{.FieldJson}}:false,
+                {{- range .Fields}}
+                {{- if .DictType }}
+                {{ .DictType }}
+                [],
             {{ end -}}
-            {{- if eq .FieldType "string" -}}
-               {{.FieldJson}}:"",
-            {{ end -}}
-            {{- if eq .FieldType "int" -}}
-               {{.FieldJson}}:0,
-            {{ end -}}
-            {{- if eq .FieldType "time.Time" -}}
-               {{.FieldJson}}:new Date(),
-            {{ end -}}
-            {{- if eq .FieldType "float64" -}}
-               {{.FieldJson}}:0,
-            {{ end -}}
-            {{ end }}
-      }
-    };
-  },
-  methods: {
-    async save() {
-      let res;
-      switch (this.type) {
-        case "create":
-          res = await create{{.StructName}}(this.formData);
-          break;
-        case "update":
-          res = await update{{.StructName}}(this.formData);
-          break;
-        default:
-          res = await create{{.StructName}}(this.formData);
-          break;
-      }
-      if (res.code == 0) {
-        this.$message({
+        {{end -}}
+
+        formData: {
+    {{range .Fields}}
+    {{- if eq .FieldType "bool" -}}
+    {{.FieldJson}}:
+    false,
+    {{ end -}}
+    {{- if eq .FieldType "string" -}}
+    {{.FieldJson}}:
+    "",
+    {{ end -}}
+    {{- if eq .FieldType "int" -}}
+    {{.FieldJson}}:
+    0,
+    {{ end -}}
+    {{- if eq .FieldType "time.Time" -}}
+    {{.FieldJson}}:
+    new Date(),
+    {{ end -}}
+    {{- if eq .FieldType "float64" -}}
+    {{.FieldJson}}:
+    0,
+    {{ end -}}
+    {{ end }}
+    }
+    }
+    },
+    {
+        async
+        save()
+        {
+            let res;
+            switch (this.type) {
+                case "create":
+                    res = await create{{.StructName}}(this.formData);
+                    break;
+                case "update":
+                    res = await update{{.StructName}}(this.formData);
+                    break;
+                default:
+                    res = await create{{.StructName}}(this.formData);
+                    break;
+            }
+            if (res.code == 0) {
+                this.$message({
           type:"success",
           message:"创建/更改成功"
         })
@@ -117,8 +127,8 @@ export default {
     await this.getDict("{{.DictType}}");
     {{ end -}}
   {{- end }}
-}
-};
+    }
+    }
 </script>
 
 <style>

@@ -20,6 +20,9 @@ jwt:
   signing-key: Driving
 local:
   path: uploads/file
+music:
+  list-id: "19723756"
+  length: 50
 mysql:
   config: charset=utf8mb4&parseTime=True&loc=Local
   db-name: Driving_School
@@ -46,10 +49,6 @@ weather:
   lat: "23.4155"
   log: "113.0968"
   units: metric
-#  爬取163音乐相关歌单设置
-music:
-  #  [19723756 飙升榜，3779629 新歌榜] 每日更新
-  list-id: "3779629"
 zap:
   director: log
   encode-level: LowercaseColorLevelEncoder
