@@ -53,8 +53,8 @@ require (
 	google.golang.org/protobuf v1.24.0 // indirect
 	gopkg.in/ini.v1 v1.55.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
-	gorm.io/driver/mysql v1.0.3
-	gorm.io/gorm v1.20.11
+	gorm.io/driver/mysql v1.0.5
+	gorm.io/gorm v1.21.3
 )
 
 replace github.com/casbin/gorm-adapter/v3 => github.com/casbin/gorm-adapter/v3 v3.0.2

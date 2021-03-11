@@ -50,6 +50,7 @@ func GetTopList() (List []SongList, err error) {
 	}
 	musicList := musicListRaw.FindAllByTag("a")
 	count := 1
+	length := global.GVA_CONFIG.Music.Length
 	for _, e := range musicList {
 
 		songName := e.LastChild.Data
@@ -72,7 +73,7 @@ func GetTopList() (List []SongList, err error) {
 		artist := artistRaw.LastChild.Data
 		src := "http://music.163.com/song/media/outer/url?id=" + id + ".mp3"
 		List = append(List, SongList{num, songName, id, src, pic, artist})
-		if count == 10 {
+		if count == length {
 			break
 		}
 		count++
