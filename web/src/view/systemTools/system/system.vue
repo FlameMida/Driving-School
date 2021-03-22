@@ -1,12 +1,9 @@
 <template>
   <div class="system">
-    <el-form :model="config" label-width="100px" ref="form" class="system">
+    <el-form ref="form" :model="config" class="system" label-width="200px">
       <!--  System start  -->
       <h2>系统配置</h2>
-      <el-form-item label="环境值">
-        <el-input v-model="config.system.env"></el-input>
-      </el-form-item>
-      <el-form-item label="端口值">
+      <el-form-item label="服务端口">
         <el-input v-model.number="config.system.addr"></el-input>
       </el-form-item>
       <el-form-item label="数据库类型">
@@ -23,8 +20,8 @@
 
         </el-select>
       </el-form-item>
-      <el-form-item label="配置文件环境变量名">
-        <el-input v-model.number="config.system.configEnv"></el-input>
+      <el-form-item label="系统环境">
+        <el-input v-model.number="config.system.env"></el-input>
       </el-form-item>
       <el-form-item label="数据初始化">
         <el-checkbox v-model="config.system.needInitData">开启</el-checkbox>
@@ -58,10 +55,10 @@
       <el-form-item label="软链接名称">
         <el-input v-model="config.zap.linkName"></el-input>
       </el-form-item>
-      <el-form-item label="编码级">
+      <el-form-item label="编码类型">
         <el-input v-model="config.zap.encodeLevel"></el-input>
       </el-form-item>
-      <el-form-item label="栈名">
+      <el-form-item label="追踪栈名">
         <el-input v-model="config.zap.stacktraceKey"></el-input>
       </el-form-item>
       <el-form-item label="显示行">
@@ -77,10 +74,10 @@
       <el-form-item label="db">
         <el-input v-model="config.redis.db"></el-input>
       </el-form-item>
-      <el-form-item label="addr">
+      <el-form-item label="地址">
         <el-input v-model="config.redis.addr"></el-input>
       </el-form-item>
-      <el-form-item label="password">
+      <el-form-item label="密码">
         <el-input v-model="config.redis.password"></el-input>
       </el-form-item>
       <!--  Redis end  -->
@@ -119,13 +116,13 @@
 
       <!--  Captcha start  -->
       <h2>验证码配置</h2>
-      <el-form-item label="keyLong">
+      <el-form-item label="验证码长度">
         <el-input v-model.number="config.captcha.keyLong"></el-input>
       </el-form-item>
-      <el-form-item label="imgWidth">
+      <el-form-item label="验证码图片宽度">
         <el-input v-model.number="config.captcha.imgWidth"></el-input>
       </el-form-item>
-      <el-form-item label="imgHeight">
+      <el-form-item label="验证码图片高度">
         <el-input v-model.number="config.captcha.imgHeight"></el-input>
       </el-form-item>
       <!--  Captcha end  -->
@@ -139,19 +136,19 @@
         <el-form-item label="password">
           <el-input v-model="config.mysql.password"></el-input>
         </el-form-item>
-        <el-form-item label="path">
+        <el-form-item label="DSN">
           <el-input v-model="config.mysql.path"></el-input>
         </el-form-item>
-        <el-form-item label="dbname">
+        <el-form-item label="数据库名">
           <el-input v-model="config.mysql.dbname"></el-input>
         </el-form-item>
-        <el-form-item label="maxIdleConns">
+        <el-form-item label="最大闲置连接数">
           <el-input v-model.number="config.mysql.maxIdleConns"></el-input>
         </el-form-item>
-        <el-form-item label="maxOpenConns">
+        <el-form-item label="最大连接数">
           <el-input v-model.number="config.mysql.maxOpenConns"></el-input>
         </el-form-item>
-        <el-form-item label="logMode">
+        <el-form-item label="日志模式">
           <el-checkbox v-model="config.mysql.logMode"></el-checkbox>
         </el-form-item>
       </template>
