@@ -2,6 +2,7 @@
   <div class="system">
     <el-form ref="form" :model="config" class="system" label-width="200px">
       <!--  System start  -->
+      <!--      TODO：music & weather config-->
       <h2>系统配置</h2>
       <el-form-item label="服务端口">
         <el-input v-model.number="config.system.addr"></el-input>
