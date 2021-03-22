@@ -44,7 +44,11 @@
 
       <el-table-column label="用户昵称" prop="nickName" width="220px"></el-table-column>
 
-      <el-table-column label="用户登录名" prop="username" width="220px"></el-table-column>
+      <el-table-column label="用户登录名" prop="userName" width="220px"></el-table-column>
+
+      <el-table-column label="用户手机" prop="phone" width="220px"></el-table-column>
+
+      <el-table-column label="教练" prop="coach_name" width="220px"></el-table-column>
 
       <el-table-column label="用户UUID" prop="uuid" width="320px"></el-table-column>
 
@@ -54,7 +58,7 @@
       <el-table-column label="按钮组">
         <template slot-scope="scope">
           <el-button class="table-button" icon="el-icon-edit" size="small" type="primary"
-                     @click="updateStudent(scope.row)">变更
+                     @click="updateStudent(scope.row)">修改
           </el-button>
           <el-button icon="el-icon-delete" size="mini" type="danger" @click="deleteRow(scope.row)">删除</el-button>
         </template>
@@ -75,15 +79,15 @@
     <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="弹窗操作">
       <el-form :model="formData" label-position="right" label-width="130px" size="medium">
         <el-form-item label="用户角色ID:">
-          <el-input v-model="formData.authorityId" clearable placeholder="请输入"></el-input>
+          <el-input v-model="formData.authorityId" clearable placeholder="请输入" readonly></el-input>
         </el-form-item>
 
-        <el-form-item label="用户头像:">
-          <el-input v-model="formData.headerImg" clearable placeholder="请输入"></el-input>
-        </el-form-item>
-
-        <el-form-item label="用户昵称:">
+        <el-form-item label="用户姓名:">
           <el-input v-model="formData.nickName" clearable placeholder="请输入"></el-input>
+        </el-form-item>
+
+        <el-form-item label="用户手机:">
+          <el-input v-model="formData.phone" clearable placeholder="请输入"></el-input>
         </el-form-item>
 
         <el-form-item label="用户登录密码:">
@@ -105,7 +109,8 @@ import {
   deleteStudentByIds,
   findStudent,
   getStudentList,
-  updateStudent
+  updateStudent,
+  updateStudentPWD
 } from "@/api/student"; //  此处请自行替换地址
 import {formatTimeToStr} from "@/utils/date";
 import infoList from "@/mixins/infoList";
@@ -119,14 +124,16 @@ export default {
       dialogFormVisible: false,
       type: "",
       deleteVisible: false,
-      multipleSelection: [], formData: {
+      multipleSelection: [],
+      formData: {
         authorityId: "",
-        hasServerInfo: false,
         headerImg: "",
         nickName: "",
         password: "",
         username: "",
         uuid: "",
+        phone: "",
+        coach_name: "",
 
       }
     };
@@ -237,6 +244,9 @@ export default {
           res = await createStudent(this.formData);
           break;
         case "update":
+          if (this.formData.password) {
+            res = await updateStudentPWD(this.formData)
+          }
           res = await updateStudent(this.formData);
           break;
         default:

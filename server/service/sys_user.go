@@ -51,6 +51,29 @@ func ChangePassword(u *model.SysUser, newPassword string) (err error, userInter 
 	return err, u
 }
 
+//@function: ChangePasswordAdmin
+//@description: 强制修改用户密码
+//@param: u *model.SysUser, newPassword string
+//@return: err error, userInter *model.SysUser
+
+func ChangePasswordAdmin(u *model.SysUser, newPassword string) (err error, userInter *model.SysUser) {
+	var user model.SysUser
+	err = global.GVA_DB.Where("username = ? ", u.Username).First(&user).Update("password", utils.MD5V([]byte(newPassword))).Error
+	return err, u
+}
+
+//@function: ChangePhone
+//@description: 修改手机号
+//@param: u *model.SysUser, newPhone string
+//@return: err error, userInter *model.SysUser
+
+func ChangePhone(u *model.SysUser, newPhone string) (err error, userInter *model.SysUser) {
+	var user model.SysUser
+
+	err = global.GVA_DB.Where("username = ? AND phone = ?", u.Username, u.Phone).First(&user).Update("phone", newPhone).Error
+	return err, u
+}
+
 //@function: GetUserInfoList
 //@description: 分页获取数据
 //@param: info request.PageInfo

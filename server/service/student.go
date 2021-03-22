@@ -4,6 +4,7 @@ import (
 	"Driving-school/global"
 	"Driving-school/model"
 	"Driving-school/model/request"
+	"Driving-school/utils"
 )
 
 //@function: CreateStudent
@@ -42,7 +43,13 @@ func DeleteStudentByIds(ids request.IdsReq) (err error) {
 //@return: err error
 
 func UpdateStudent(student model.Student) (err error) {
-	err = global.GVA_DB.Save(&student).Error
+	if len(student.Password) > 0 {
+		student.Password = utils.MD5V([]byte(student.Password))
+		err = global.GVA_DB.Updates(&student).Error
+	} else {
+		err = global.GVA_DB.Omit("password").Updates(&student).Error
+	}
+
 	return err
 }
 
@@ -77,5 +84,10 @@ func GetStudentInfoList(info request.StudentSearch) (err error, list interface{}
 	}
 	err = db.Count(&total).Error
 	err = db.Limit(limit).Offset(offset).Find(&students).Error
+	var coach model.Coach
+	for k, student := range students {
+		global.GVA_DB.Where(" `id` = ? ", student.CoachId).Select("nick_name").Take(&coach)
+		students[k].CoachName = coach.NickName
+	}
 	return err, students, total
 }

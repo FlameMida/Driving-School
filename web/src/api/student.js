@@ -65,6 +65,22 @@ export const updateStudent = (data) => {
     })
 }
 
+// @Tags Student
+// @Summary 更新Student
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.Student true "更新Student密码"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
+// @Router /user/updateStudentPWD [put]
+export const updateStudentPWD = (data) => {
+    return service({
+        url: "/user/changePasswordAdmin",
+        method: 'put',
+        data
+    })
+}
+
 
 // @Tags Student
 // @Summary 用id查询Student

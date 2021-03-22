@@ -21,7 +21,7 @@ jwt:
 local:
   path: uploads/file
 music:
-  list-id: "19723756"
+  list-id: "3779629"
   length: 50
 mysql:
   config: charset=utf8mb4&parseTime=True&loc=Local

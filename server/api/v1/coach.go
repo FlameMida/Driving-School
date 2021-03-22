@@ -76,8 +76,11 @@ func DeleteCoachByIds(c *gin.Context) {
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
 // @Router /coach/updateCoach [put]
 func UpdateCoach(c *gin.Context) {
-	var coach model.Coach
+	var (
+		coach model.Coach
+	)
 	_ = c.ShouldBindJSON(&coach)
+
 	if err := service.UpdateCoach(coach); err != nil {
 		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
 		response.FailWithMessage("更新失败", c)
