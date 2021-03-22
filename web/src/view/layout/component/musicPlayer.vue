@@ -1,6 +1,7 @@
 <template>
   <div>
     <APlayer
+
         :audio="audio"
         :fixed="true"
         :listFolded="true"
@@ -23,6 +24,7 @@ export default {
   },
   data() {
     return {
+
       audio:
           [
             {
@@ -37,6 +39,7 @@ export default {
     }
   }, methods: {
     async loadMusic() {
+
       const {data} = await getMusic();
       this.audio = data.music
       // this.list = data.music

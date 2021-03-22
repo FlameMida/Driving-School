@@ -69,7 +69,7 @@ func GetDashboardInfo() (dashboard *utils.DashBoard, err error) {
 		return &d, err
 	}
 
-	rows := global.GVA_DB.Find(&model.SysUser{}).RowsAffected
+	rows := global.GVA_DB.Find(&[]model.SysUser{}).RowsAffected
 	d.TotalUsers = int(rows)
 	return &d, nil
 }

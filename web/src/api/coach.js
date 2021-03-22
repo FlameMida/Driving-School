@@ -64,7 +64,21 @@ export const updateCoach = (data) => {
         data
     })
 }
-
+// @Tags Coach
+// @Summary 更新Coach
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body model.Coach true "更新Coach密码"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
+// @Router /coach/updateCoachPWD [put]
+export const updateCoachPWD = (data) => {
+    return service({
+        url: "/user/changePasswordAdmin",
+        method: 'put',
+        data
+    })
+}
 
 // @Tags Coach
 // @Summary 用id查询Coach

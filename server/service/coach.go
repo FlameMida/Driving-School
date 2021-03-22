@@ -4,6 +4,7 @@ import (
 	"Driving-school/global"
 	"Driving-school/model"
 	"Driving-school/model/request"
+	"Driving-school/utils"
 )
 
 //@function: CreateCoach
@@ -42,7 +43,13 @@ func DeleteCoachByIds(ids request.IdsReq) (err error) {
 //@return: err error
 
 func UpdateCoach(coach model.Coach) (err error) {
-	err = global.GVA_DB.Save(&coach).Error
+	if len(coach.Password) > 0 {
+		coach.Password = utils.MD5V([]byte(coach.Password))
+		err = global.GVA_DB.Updates(&coach).Error
+	} else {
+		err = global.GVA_DB.Omit("password").Updates(&coach).Error
+	}
+
 	return err
 }
 

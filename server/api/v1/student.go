@@ -76,7 +76,9 @@ func DeleteStudentByIds(c *gin.Context) {
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
 // @Router /student/updateStudent [put]
 func UpdateStudent(c *gin.Context) {
-	var student model.Student
+	var (
+		student model.Student
+	)
 	_ = c.ShouldBindJSON(&student)
 	if err := service.UpdateStudent(student); err != nil {
 		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))

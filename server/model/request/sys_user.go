@@ -26,6 +26,19 @@ type ChangePasswordStruct struct {
 	NewPassword string `json:"newPassword"`
 }
 
+// Modify info structure
+type ChangePWDStruct struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+// Modify PhoneNumber structure
+type ChangePhoneStruct struct {
+	Username string `json:"username"`
+	Phone    string `json:"phone"`
+	NewPhone string `json:"newphone"`
+}
+
 // Modify  user's auth structure
 type SetUserAuth struct {
 	UUID        uuid.UUID `json:"uuid"`

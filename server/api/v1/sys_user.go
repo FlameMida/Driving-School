@@ -165,6 +165,52 @@ func ChangePassword(c *gin.Context) {
 }
 
 // @Tags SysUser
+// @Summary 强制修改用户密码
+// @Security ApiKeyAuthWD
+// @Produce  application/json
+// @Param data body request.ChangePWDStruct true "新密码"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
+// @Router /user/ChangePasswordAdmin [put]
+func ChangePasswordAdmin(c *gin.Context) {
+	var user request.ChangePWDStruct
+	_ = c.ShouldBindJSON(&user)
+	if err := utils.Verify(user, utils.ChangePWDVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	U := &model.SysUser{Username: user.Username}
+	if err, _ := service.ChangePasswordAdmin(U, user.Password); err != nil {
+		global.GVA_LOG.Error("修改失败", zap.Any("err", err))
+		response.FailWithMessage("修改失败", c)
+	} else {
+		response.OkWithMessage("修改成功", c)
+	}
+}
+
+// @Tags SysUser
+// @Summary 用户修改手机号
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Param data body request.ChangePhoneStruct true "用户名, 原手机, 新手机"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
+// @Router /user/changePhone [put]
+func ChangePhone(c *gin.Context) {
+	var user request.ChangePhoneStruct
+	_ = c.ShouldBindJSON(&user)
+	if err := utils.Verify(user, utils.ChangePasswordVerify); err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	U := &model.SysUser{Username: user.Username, Phone: user.Phone}
+	if err, _ := service.ChangePhone(U, user.NewPhone); err != nil {
+		global.GVA_LOG.Error("修改失败", zap.Any("err", err))
+		response.FailWithMessage("修改失败，原手机号与当前账户不符", c)
+	} else {
+		response.OkWithMessage("修改成功", c)
+	}
+}
+
+// @Tags SysUser
 // @Summary 分页获取用户列表
 // @Security ApiKeyAuth
 // @accept application/json
