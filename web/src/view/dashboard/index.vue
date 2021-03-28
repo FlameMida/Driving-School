@@ -106,7 +106,7 @@
       <!--        </el-col>-->
       <!--        <el-col :xs="24" :sm="24" :lg="12">-->
       <!--          <div class="chart-player">-->
-      <!--            <todo-list />-->
+      <!--            <to-do-list />-->
       <!--          </div>-->
       <!--        </el-col>-->
       <!--      </el-row>-->

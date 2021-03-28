@@ -47,8 +47,19 @@
       <el-table-column label="用户登录名" prop="userName" width="220px"></el-table-column>
 
       <el-table-column label="用户手机" prop="phone" width="220px"></el-table-column>
-
-      <el-table-column label="教练" prop="coach_name" width="220px"></el-table-column>
+      <!--TODO 快速更改教练-->
+      <el-table-column label="教练" prop="coach_name" width="220px">
+        <template slot-scope="scope">
+          <el-cascader
+              v-model="scope.row.authority.authorityId"
+              :options="authOptions"
+              :props="{ checkStrictly: true,label:'authorityName',value:'authorityId',disabled:'disabled',emitPath:false}"
+              :show-all-levels="false"
+              filterable
+              @change="changeAuthority(scope.row)"
+          ></el-cascader>
+        </template>
+      </el-table-column>
 
       <el-table-column label="用户UUID" prop="uuid" width="320px"></el-table-column>
 
@@ -75,7 +86,7 @@
         @size-change="handleSizeChange"
         layout="total, sizes, prev, pager, next, jumper"
     ></el-pagination>
-
+    <!--TODO 表单创建和修改的区分 uuid创建时不生成-->
     <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="弹窗操作">
       <el-form :model="formData" label-position="right" label-width="130px" size="medium">
         <el-form-item label="用户角色ID:">
