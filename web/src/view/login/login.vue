@@ -46,12 +46,12 @@
             />
             <div class="vPic">
               <img
-                v-if="picPath"
-                :src="picPath"
-                width="100%"
-                height="100%"
-                alt="请输入验证码"
-                @click="loginVefify()"
+                  v-if="picPath"
+                  :src="picPath"
+                  width="100%"
+                  height="100%"
+                  alt="请输入验证码"
+                  @click="loginVerify()"
               />
             </div>
           </el-form-item>
@@ -124,7 +124,7 @@ export default {
     };
   },
   created() {
-    this.loginVefify();
+    this.loginVerify();
     this.curYear = new Date().getFullYear();
   },
   methods: {
@@ -137,7 +137,7 @@ export default {
         if (v) {
           const flag = await this.login();
           if (!flag) {
-            this.loginVefify();
+            this.loginVerify();
           }
         } else {
           this.$message({
@@ -145,7 +145,7 @@ export default {
             message: "请正确填写登录信息",
             showClose: true,
           });
-          this.loginVefify();
+          this.loginVerify();
           return false;
         }
       });
@@ -153,7 +153,7 @@ export default {
     changeLock() {
       this.lock === "lock" ? (this.lock = "unlock") : (this.lock = "lock");
     },
-    loginVefify() {
+    loginVerify() {
       captcha({}).then((ele) => {
         this.picPath = ele.data.picPath;
         this.loginForm.captchaId = ele.data.captchaId;

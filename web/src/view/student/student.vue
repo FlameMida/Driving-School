@@ -79,7 +79,11 @@
     <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="弹窗操作">
       <el-form :model="formData" label-position="right" label-width="130px" size="medium">
         <el-form-item label="用户角色ID:">
-          <el-input v-model="formData.authorityId" clearable placeholder="请输入" readonly></el-input>
+          <el-input v-model="formData.authorityId" clearable placeholder="请输入"></el-input>
+        </el-form-item>
+
+        <el-form-item label="用户账号:">
+          <el-input v-model="formData.username" clearable placeholder="请输入"></el-input>
         </el-form-item>
 
         <el-form-item label="用户姓名:">

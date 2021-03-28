@@ -12,6 +12,7 @@ type DashBoard struct {
 	ActiveUsers   string `json:"active_users"`
 	TotalUsers    int    `json:"total_users"`
 	TotalStudents int    `json:"total_students"`
+	TotalCoaches  int    `json:"total_coaches"`
 }
 
 func InitTimeInfo() (info string, msg string) {

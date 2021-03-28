@@ -24,10 +24,10 @@
             </el-row>
           </div>
         </el-col>
-        <el-col :xs="24" :lg='8' :md="8">
+        <el-col :lg='8' :md="8" :xs="32">
           <div class="car-right">
             <el-row>
-              <el-col :span="8">
+              <el-col :span="6">
                 <el-card shadow="hover">
                   <div class="car-item">
                     <span class="flow"><i class="el-icon-s-grid"></i></span>
@@ -37,7 +37,7 @@
                 </el-card>
               </el-col>
 
-              <el-col :span="8">
+              <el-col :span="6">
                 <el-card shadow="hover">
                   <div class="car-item">
                   <span class="user-number">
@@ -48,11 +48,22 @@
                   </div>
                 </el-card>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="6">
                 <el-card shadow="hover">
                   <div class="car-item">
                   <span class="feedback">
-                    <i class="el-icon-star-on"></i>
+                    <i class="el-icon-s-custom"></i>
+                  </span>
+                    <span>教练数：</span>
+                    <b>{{ TotalCoaches }}</b>
+                  </div>
+                </el-card>
+              </el-col>
+              <el-col :span="6">
+                <el-card shadow="hover">
+                  <div class="car-item">
+                  <span class="feedback">
+                    <i class="el-icon-s-custom"></i>
                   </span>
                     <span>学员数：</span>
                     <b>{{ TotalStudents }}</b>
@@ -141,7 +152,7 @@ export default {
       ActiveUsers: "0",
       TotalUsers: "0",
       TotalStudents: "0",
-      TotalCoach: "0",
+      TotalCoaches: "0",
       toolCards: [
         {
           label: "用户管理",
@@ -162,19 +173,19 @@ export default {
           color: "#b37feb",
         },
         {
-          label: "代码生成器",
+          label: "学员管理",
           icon: "el-icon el-icon-cpu",
-          name: "autoCode",
+          name: "studentM",
           color: "#ffd666",
         },
         {
-          label: "表单生成器",
+          label: "教练管理",
           icon: "el-icon el-icon-document-checked",
-          name: "formCreate",
+          name: "coachM",
           color: "#ff85c0",
         },
         {
-          label: "关于我们",
+          label: "关于驾校",
           icon: "el-icon el-icon-user",
           name: "about",
           color: "#5cdbd3",
@@ -227,6 +238,7 @@ export default {
       this.ActiveUsers = data.dashboard.active_users;
       this.TotalUsers = data.dashboard.total_users;
       this.TotalStudents = data.dashboard.total_students;
+      this.TotalCoaches = data.dashboard.total_coaches;
 
     },
   },
