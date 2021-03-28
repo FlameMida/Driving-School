@@ -58,15 +58,18 @@
         <el-form-item label="密码" label-width="80px" prop="password">
           <el-input v-model="userInfo.password"></el-input>
         </el-form-item>
-        <el-form-item label="别名" label-width="80px" prop="nickName">
+        <el-form-item label="姓名" label-width="80px" prop="nickName">
           <el-input v-model="userInfo.nickName"></el-input>
         </el-form-item>
-        <el-form-item label="头像" label-width="80px">
-          <div style="display:inline-block" @click="openHeaderChange">
-            <img class="header-img-box" v-if="userInfo.headerImg" :src="userInfo.headerImg"/>
-            <div v-else class="header-img-box">从媒体库选择</div>
-          </div>
+        <el-form-item label="手机" label-width="80px" prop="phone">
+          <el-input v-model="userInfo.phone"></el-input>
         </el-form-item>
+        <!--        <el-form-item label="头像" label-width="80px">-->
+        <!--          <div style="display:inline-block" @click="openHeaderChange">-->
+        <!--            <img class="header-img-box" v-if="userInfo.headerImg" :src="userInfo.headerImg"/>-->
+        <!--            <div v-else class="header-img-box">从媒体库选择</div>-->
+        <!--          </div>-->
+        <!--        </el-form-item>-->
         <el-form-item label="用户角色" label-width="80px" prop="authorityId">
           <el-cascader
               v-model="userInfo.authorityId"
@@ -112,7 +115,8 @@ export default {
         password: "",
         nickName: "",
         headerImg: "",
-        authorityId: ""
+        authorityId: "",
+        phone: ""
       },
       rules: {
         username: [
@@ -124,7 +128,7 @@ export default {
           {min: 6, message: "最低6位字符", trigger: "blur"}
         ],
         nickName: [
-          {required: true, message: "请输入用户昵称", trigger: "blur"}
+          {required: true, message: "请输入用户姓名", trigger: "blur"}
         ],
         authorityId: [
           {required: true, message: "请选择用户角色", trigger: "blur"}

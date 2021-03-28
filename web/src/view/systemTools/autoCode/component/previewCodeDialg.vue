@@ -10,7 +10,6 @@
 
 <script>
 import marked from "marked"
-// TODO 版本太旧
 import hljs from "highlight.js";
 // import 'highlight.js/styles/atelier-cave-light.css';
 import 'highlight.js/styles/atelier-plateau-light.css';

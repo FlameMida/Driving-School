@@ -69,7 +69,8 @@ func GetDashboardInfo() (dashboard *utils.DashBoard, err error) {
 		return &d, err
 	}
 
-	rows := global.GVA_DB.Find(&[]model.SysUser{}).RowsAffected
-	d.TotalUsers = int(rows)
+	d.TotalUsers = int(global.GVA_DB.Find(&[]model.SysUser{}).RowsAffected)
+	d.TotalStudents = int(global.GVA_DB.Where("authority_id= ?", "200").Find(&[]model.SysUser{}).RowsAffected)
+	d.TotalCoaches = int(global.GVA_DB.Where("authority_id= ?", "100").Find(&[]model.SysUser{}).RowsAffected)
 	return &d, nil
 }
