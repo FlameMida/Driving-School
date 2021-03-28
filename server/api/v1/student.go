@@ -10,6 +10,8 @@ import (
 	"go.uber.org/zap"
 )
 
+//todo uuid 和验证
+
 // @Tags Student
 // @Summary 创建Student
 // @Security ApiKeyAuth

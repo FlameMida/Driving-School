@@ -10,6 +10,8 @@ import (
 	"go.uber.org/zap"
 )
 
+//todo uuid 和验证
+
 // @Tags Coach
 // @Summary 创建Coach
 // @Security ApiKeyAuth
@@ -19,6 +21,7 @@ import (
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /coach/createCoach [post]
 func CreateCoach(c *gin.Context) {
+
 	var coach model.Coach
 	_ = c.ShouldBindJSON(&coach)
 	if err := service.CreateCoach(coach); err != nil {

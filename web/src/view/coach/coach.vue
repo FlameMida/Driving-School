@@ -74,7 +74,7 @@
         @size-change="handleSizeChange"
         layout="total, sizes, prev, pager, next, jumper"
     ></el-pagination>
-
+    <!--TODO 表单创建和修改的区分 uuid创建时不生成-->
     <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="弹窗操作">
       <el-form :model="formData" label-position="right" label-width="130px" size="medium">
         <el-form-item label="用户角色ID:">
