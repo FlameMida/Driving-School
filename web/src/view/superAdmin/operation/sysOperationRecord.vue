@@ -38,7 +38,7 @@
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column label="操作人" width="140">
         <template slot-scope="scope">
-          <div>{{scope.row.user.userName}}({{scope.row.user.nickName}})</div>
+          <div>{{ scope.row.user.username }}({{ scope.row.user.nickName }})</div>
         </template>
       </el-table-column>
       <el-table-column label="日期" width="180">
@@ -112,8 +112,8 @@ import {
   deleteSysOperationRecord,
   getSysOperationRecordList,
   deleteSysOperationRecordByIds
-} from "@/api/sysOperationRecord"; //  此处请自行替换地址
-import { formatTimeToStr } from "@/utils/date";
+} from "@/api/sysOperationRecord";
+import {formatTimeToStr} from "@/utils/date";
 import infoList from "@/mixins/infoList";
 
 export default {
@@ -156,7 +156,7 @@ export default {
     }
   },
   methods: {
-    //条件搜索前端看此方法
+
     onSubmit() {
       this.page = 1;
       this.pageSize = 10;

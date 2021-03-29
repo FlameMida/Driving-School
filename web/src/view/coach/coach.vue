@@ -37,24 +37,22 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
 
+      <el-table-column label="用户UUID" prop="uuid" width="320px"></el-table-column>
+      <!--      <el-table-column label="用户角色"  width="220px"></el-table-column>-->
 
-      <el-table-column label="用户角色ID" prop="authorityId" width="220px"></el-table-column>
+      <!--      <el-table-column label="用户头像" prop="headerImg" width="220px"></el-table-column>-->
 
-      <el-table-column label="用户头像" prop="headerImg" width="220px"></el-table-column>
+      <el-table-column label="用户姓名" prop="nickName" width="220px"></el-table-column>
 
-      <el-table-column label="用户昵称" prop="nickName" width="220px"></el-table-column>
-
-      <el-table-column label="用户登录名" prop="userName" width="220px"></el-table-column>
+      <el-table-column label="用户登录名" prop="username" width="220px"></el-table-column>
 
       <el-table-column label="用户手机" prop="phone" width="220px"></el-table-column>
-
-      <el-table-column label="用户UUID" prop="uuid" width="320px"></el-table-column>
 
       <el-table-column label="入职日期" width="280px">
         <template slot-scope="scope">{{ scope.row.CreatedAt|formatDate }}</template>
       </el-table-column>
 
-      <el-table-column label="按钮组">
+      <el-table-column label="按钮组" min-width="220px">
         <template slot-scope="scope">
           <el-button class="table-button" icon="el-icon-edit" size="small" type="primary"
                      @click="updateCoach(scope.row)">修改
@@ -74,26 +72,46 @@
         @size-change="handleSizeChange"
         layout="total, sizes, prev, pager, next, jumper"
     ></el-pagination>
-    <!--TODO 表单创建和修改的区分 uuid创建时不生成-->
-    <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="弹窗操作">
-      <el-form :model="formData" label-position="right" label-width="130px" size="medium">
-        <el-form-item label="用户角色ID:">
-          <el-input v-model="formData.authorityId" clearable placeholder="请输入"></el-input>
+    <el-dialog :before-close="closeDialog" :title="title" :visible.sync="dialogFormVisible">
+      <el-form ref="userForm" :model="formData" :rules="rules" label-position="right" label-width="130px" size="medium">
+        <el-form-item label="用户角色" prop="authorityId" required>
+          <template v-if="type==='create'">
+            <el-cascader
+                v-model="formData.authorityId"
+                :options="authOptions"
+                :props="{ checkStrictly: true,label:'authorityName',value:'authorityId',disabled:'disabled',emitPath:false}"
+                :show-all-levels="false"
+                disabled
+                filterable
+            ></el-cascader>
+          </template>
+          <template v-if="type==='update'">
+            <el-cascader
+                v-model="formData.authorityId"
+                :options="authOptions"
+                :props="{ checkStrictly: true,label:'authorityName',value:'authorityId',disabled:'disabled',emitPath:false}"
+                :show-all-levels="false"
+                filterable
+            ></el-cascader>
+          </template>
         </el-form-item>
 
-        <el-form-item label="用户账号:">
+        <el-form-item label="用户账号:" prop="username" required>
           <el-input v-model="formData.username" clearable placeholder="请输入"></el-input>
         </el-form-item>
 
-        <el-form-item label="用户姓名:">
+        <el-form-item label="用户姓名:" prop="nickName" required>
           <el-input v-model="formData.nickName" clearable placeholder="请输入"></el-input>
         </el-form-item>
 
-        <el-form-item label="用户手机:">
+        <el-form-item label="用户手机:" prop="phone">
           <el-input v-model="formData.phone" clearable placeholder="请输入"></el-input>
         </el-form-item>
 
-        <el-form-item label="用户登录密码:">
+        <el-form-item v-if="type==='create'" label="用户登录密码:" prop="password" required>
+          <el-input v-model="formData.password" clearable placeholder="请输入"></el-input>
+        </el-form-item>
+        <el-form-item v-if="type==='update'" label="用户登录密码:" prop="password">
           <el-input v-model="formData.password" clearable placeholder="请输入"></el-input>
         </el-form-item>
 
@@ -115,9 +133,11 @@ import {
   getCoachList,
   updateCoach,
   updateCoachPWD
-} from "@/api/coach"; //  此处请自行替换地址
+} from "@/api/coach";
 import {formatTimeToStr} from "@/utils/date";
 import infoList from "@/mixins/infoList";
+import {getAuthorityList} from "@/api/authority";
+
 
 export default {
   name: "Coach",
@@ -125,10 +145,13 @@ export default {
   data() {
     return {
       listApi: getCoachList,
+      title: "",
       dialogFormVisible: false,
       type: "",
+      authOptions: [],
       deleteVisible: false,
-      multipleSelection: [], formData: {
+      multipleSelection: [],
+      formData: {
         authorityId: "",
         hasServerInfo: false,
         headerImg: "",
@@ -137,13 +160,31 @@ export default {
         username: "",
         uuid: "",
         phone: "",
-
+      },
+      rules: {
+        phone: [
+          {min: 11, max: 11, message: '长度为11位', trigger: 'blur'}
+        ],
+        username: [
+          {required: true, message: "请输入用户名", trigger: "blur"},
+          {min: 6, message: "最低6位字符", trigger: "blur"}
+        ],
+        password: [
+          {message: "请输入用户密码", trigger: "blur"},
+          {min: 6, message: "最低6位字符", trigger: "blur"}
+        ],
+        nickName: [
+          {required: true, message: "请输入用户姓名", trigger: "blur"}
+        ],
+        authorityId: [
+          {required: true, message: "请选择用户角色", trigger: "blur"}
+        ]
       }
     };
   },
   filters: {
     formatDate: function (time) {
-      if (time != null && time != "") {
+      if (time != null && time !== "") {
         var date = new Date(time);
         return formatTimeToStr(date, "yyyy-MM-dd hh:mm:ss");
       } else {
@@ -159,14 +200,38 @@ export default {
     }
   },
   methods: {
-    //条件搜索前端看此方法
+
     onSubmit() {
       this.page = 1
       this.pageSize = 10
-      if (this.searchInfo.hasServerInfo == "") {
+      if (this.searchInfo.hasServerInfo === "") {
         this.searchInfo.hasServerInfo = null
       }
       this.getTableData()
+    },
+    setOptions(authData) {
+      this.authOptions = [];
+      this.setAuthorityOptions(authData, this.authOptions);
+    },
+    setAuthorityOptions(AuthorityData, optionsData) {
+      AuthorityData &&
+      AuthorityData.map(item => {
+        if (item.children && item.children.length) {
+          const option = {
+            authorityId: item.authorityId,
+            authorityName: item.authorityName,
+            children: []
+          };
+          this.setAuthorityOptions(item.children, option.children);
+          optionsData.push(option);
+        } else {
+          const option = {
+            authorityId: item.authorityId,
+            authorityName: item.authorityName
+          };
+          optionsData.push(option);
+        }
+      });
     },
     handleSelectionChange(val) {
       this.multipleSelection = val
@@ -182,7 +247,7 @@ export default {
     },
     async onDelete() {
       const ids = []
-      if (this.multipleSelection.length == 0) {
+      if (this.multipleSelection.length === 0) {
         this.$message({
           type: 'warning',
           message: '请选择要删除的数据'
@@ -194,12 +259,12 @@ export default {
         ids.push(item.ID)
       })
       const res = await deleteCoachByIds({ids})
-      if (res.code == 0) {
+      if (res.code === 0) {
         this.$message({
           type: 'success',
           message: '删除成功'
         })
-        if (this.tableData.length == ids.length) {
+        if (this.tableData.length === ids.length) {
           this.page--;
         }
         this.deleteVisible = false
@@ -209,13 +274,16 @@ export default {
     async updateCoach(row) {
       const res = await findCoach({ID: row.ID});
       this.type = "update";
-      if (res.code == 0) {
+      this.title = "修改教练"
+      if (res.code === 0) {
         this.formData = res.data.recoach;
         this.dialogFormVisible = true;
       }
     },
+
     closeDialog() {
       this.dialogFormVisible = false;
+      this.type = ""
       this.formData = {
         authorityId: "",
         hasServerInfo: false,
@@ -236,42 +304,58 @@ export default {
         if (this.tableData.length == 1) {
           this.page--;
         }
-        this.getTableData();
+        await this.getTableData();
       }
     },
     async enterDialog() {
       let res;
       switch (this.type) {
         case "create":
-          res = await createCoach(this.formData);
+          this.$refs.userForm.validate(async valid => {
+            if (valid) {
+              res = await createCoach(this.formData);
+              if (res.code === 0) {
+                this.$message({type: "success", message: "创建成功"});
+
+              }
+              this.closeDialog();
+              await this.getTableData();
+            }
+          });
+
           break;
         case "update":
-          if (this.formData.password) {
-            res = await updateCoachPWD(this.formData)
-          }
-          res = await updateCoach(this.formData);
+          this.$refs.userForm.validate(async valid => {
+            if (valid) {
+              if (this.formData.password) {
+                res = await updateCoachPWD(this.formData)
+              }
+              res = await updateCoach(this.formData);
+              if (res.code === 0) {
+                this.$message({type: "success", message: "修改成功"});
+              }
+              this.closeDialog();
+              await this.getTableData();
+            }
+          });
           break;
         default:
           res = await createCoach(this.formData);
           break;
       }
-      if (res.code == 0) {
-        this.$message({
-          type: "success",
-          message: "创建/更改成功"
-        })
-        this.closeDialog();
-        this.getTableData();
-      }
+
     },
     openDialog() {
       this.type = "create";
+      this.formData.authorityId = "100"
+      this.title = "新增教练"
       this.dialogFormVisible = true;
     }
   },
   async created() {
     await this.getTableData();
-
+    const res = await getAuthorityList({page: 1, pageSize: 999});
+    this.setOptions(res.data.list);
   }
 };
 </script>

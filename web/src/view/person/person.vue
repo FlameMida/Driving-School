@@ -21,14 +21,17 @@
                   <i class="el-icon-user"></i>{{ userInfo.nickName }}
                 </li>
                 <li>
-                  <i class="el-icon-data-analysis"></i>广东培正学院
+                  <i class="el-icon-phone-outline"></i>{{ userInfo.phone.length > 0 ? userInfo.phone : "暂无联系方式" }}
+                </li>
+                <li>
+                  <i class="el-icon-data-analysis"></i>广东培正学院驾校
                 </li>
                 <li>
                   <i class="el-icon-video-camera-solid"></i>中国·广东·广州市
                 </li>
-                <li>
-                  <i class="el-icon-medal-1"></i>
-                </li>
+                <!--                <li>-->
+                <!--                  <i class="el-icon-medal-1"></i>-->
+                <!--                </li>-->
               </ul>
             </div>
           </div>
@@ -56,11 +59,14 @@
               </ul>
             </el-tab-pane>
           </el-tabs>
-
-
         </div>
       </el-col>
+
+      <el-col :span="18">
+
+      </el-col>
     </el-row>
+
 
     <ChooseImg ref="chooseImg" @enter-img="enterImg"/>
 
@@ -164,7 +170,7 @@ export default {
       this.$refs.modifyPwdForm.validate(valid => {
         if (valid) {
           changePassword({
-            username: this.userInfo.userName,
+            username: this.userInfo.username,
             password: this.pwdModify.password,
             newPassword: this.pwdModify.newPassword
           }).then((res) => {
@@ -182,7 +188,7 @@ export default {
       this.$refs.modifyPhoneForm.validate(valid => {
         if (valid) {
           changePhone({
-            username: this.userInfo.userName,
+            username: this.userInfo.username,
             phone: this.phoneModify.phone,
             newPhone: this.phoneModify.newPhone
           }).then((res) => {

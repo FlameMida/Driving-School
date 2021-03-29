@@ -5,6 +5,7 @@ import (
 	"Driving-school/model"
 	"Driving-school/model/request"
 	"Driving-school/utils"
+	uuid "github.com/satori/go.uuid"
 )
 
 //@function: CreateStudent
@@ -63,6 +64,16 @@ func GetStudent(id uint) (err error, student model.Student) {
 	return
 }
 
+//@function: SetUserCoach
+//@description: 设置一个用户的教练
+//@param: uuid uuid.UUID, coachId string
+//@return: err error
+
+func SetUserCoach(uuid uuid.UUID, coachId uint) (err error) {
+	err = global.GVA_DB.Where("uuid = ?", uuid).First(&model.SysUser{}).Update("coach_id", coachId).Error
+	return err
+}
+
 //@function: GetStudentInfoList
 //@description: 分页获取Student记录
 //@param: info request.StudentSearch
@@ -84,10 +95,6 @@ func GetStudentInfoList(info request.StudentSearch) (err error, list interface{}
 	}
 	err = db.Count(&total).Error
 	err = db.Limit(limit).Offset(offset).Find(&students).Error
-	var coach model.Coach
-	for k, student := range students {
-		global.GVA_DB.Where(" `id` = ? ", student.CoachId).Select("nick_name").Take(&coach)
-		students[k].CoachName = coach.NickName
-	}
+
 	return err, students, total
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="init">
-    <p class="in-one a-fadeinT">欢迎使用GIN-VUE-ADMIN</p>
-    <p class="in-two a-fadeinT">您需要初始化您的数据库并且填充初始数据</p>
+    <p class="in-one a-fadeinT">欢迎使用Driving-School</p>
+    <p class="in-two a-fadeinT">您需要初始化您的数据库并初始化数据</p>
     <div class="form-card in-three a-fadeinB">
       <el-form ref="form" :model="form" label-width="100px">
         <el-form-item label="数据库类型">
@@ -16,13 +16,13 @@
         <el-form-item label="port">
           <el-input v-model="form.port" placeholder="请输入数据库端口"></el-input>
         </el-form-item>
-        <el-form-item label="userName">
-          <el-input v-model="form.userName" placeholder="请输入数据库用户名"></el-input>
+        <el-form-item label="username">
+          <el-input v-model="form.username" placeholder="请输入数据库用户名"></el-input>
         </el-form-item>
         <el-form-item label="password">
           <el-input
-            v-model="form.password"
-            placeholder="请输入数据库密码（没有则为空）"
+              v-model="form.password"
+              placeholder="请输入数据库密码（没有则为空）"
           ></el-input>
         </el-form-item>
         <el-form-item label="dbName">
@@ -48,7 +48,7 @@ export default {
         sqlType: "mysql",
         host: "127.0.0.1",
         port: "3306",
-        userName: "root",
+        username: "root",
         password: "",
         dbName: "Driving_School",
       },

@@ -9,6 +9,7 @@ export const user = {
             nickName: "",
             headerImg: "",
             authority: "",
+            phone: ""
         },
         token: "",
     },

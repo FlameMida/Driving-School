@@ -6,37 +6,41 @@ import (
 	"Driving-school/model/request"
 	"Driving-school/model/response"
 	"Driving-school/service"
-	"Driving-school/utils"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
-//todo uuid 和验证
-
-// @Tags Coach
-// @Summary 创建Coach
+// @Tags Exam
+// @Summary 创建考试情况
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Coach true "创建Coach"
+// @Param data body model.Exam true "创建考试情况"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /coach/createCoach [post]
-func CreateCoach(c *gin.Context) {
-	Register(c)
+// @Router /Exam/createExam [post]
+func CreateExam(c *gin.Context) {
+	var Exam model.Exam
+	_ = c.ShouldBindJSON(&Exam)
+	if err := service.CreateExam(Exam); err != nil {
+		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
+		response.FailWithMessage("创建失败", c)
+	} else {
+		response.OkWithMessage("创建成功", c)
+	}
 }
 
-// @Tags Coach
-// @Summary 删除Coach
+// @Tags Exam
+// @Summary 删除Exam
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Coach true "删除Coach"
+// @Param data body model.Exam true "删除Exam"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
-// @Router /coach/deleteCoach [delete]
-func DeleteCoach(c *gin.Context) {
-	var coach model.Coach
-	_ = c.ShouldBindJSON(&coach)
-	if err := service.DeleteCoach(coach); err != nil {
+// @Router /Exam/deleteExam [delete]
+func DeleteExam(c *gin.Context) {
+	var Exam model.Exam
+	_ = c.ShouldBindJSON(&Exam)
+	if err := service.DeleteExam(Exam); err != nil {
 		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
 		response.FailWithMessage("删除失败", c)
 	} else {
@@ -44,18 +48,18 @@ func DeleteCoach(c *gin.Context) {
 	}
 }
 
-// @Tags Coach
-// @Summary 批量删除Coach
+// @Tags Exam
+// @Summary 批量删除Exam
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.IdsReq true "批量删除Coach"
+// @Param data body request.IdsReq true "批量删除Exam"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"批量删除成功"}"
-// @Router /coach/deleteCoachByIds [delete]
-func DeleteCoachByIds(c *gin.Context) {
+// @Router /Exam/deleteExamByIds [delete]
+func DeleteExamByIds(c *gin.Context) {
 	var IDS request.IdsReq
 	_ = c.ShouldBindJSON(&IDS)
-	if err := service.DeleteCoachByIds(IDS); err != nil {
+	if err := service.DeleteExamByIds(IDS); err != nil {
 		global.GVA_LOG.Error("批量删除失败!", zap.Any("err", err))
 		response.FailWithMessage("批量删除失败", c)
 	} else {
@@ -63,21 +67,20 @@ func DeleteCoachByIds(c *gin.Context) {
 	}
 }
 
-// @Tags Coach
-// @Summary 更新Coach
+// @Tags Exam
+// @Summary 更新Exam
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Coach true "更新Coach"
+// @Param data body model.Exam true "更新Exam"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
-// @Router /coach/updateCoach [put]
-func UpdateCoach(c *gin.Context) {
+// @Router /Exam/updateExam [put]
+func UpdateExam(c *gin.Context) {
 	var (
-		coach model.Coach
+		Exam model.Exam
 	)
-	_ = c.ShouldBindJSON(&coach)
-
-	if err := service.UpdateCoach(coach); err != nil {
+	_ = c.ShouldBindJSON(&Exam)
+	if err := service.UpdateExam(Exam); err != nil {
 		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
 		response.FailWithMessage("更新失败", c)
 	} else {
@@ -85,41 +88,37 @@ func UpdateCoach(c *gin.Context) {
 	}
 }
 
-// @Tags Coach
-// @Summary 用id查询Coach
+// @Tags Exam
+// @Summary 用id查询Exam
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Coach true "用id查询Coach"
+// @Param data body model.Exam true "用id查询Exam"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"查询成功"}"
-// @Router /coach/findCoach [get]
-func FindCoach(c *gin.Context) {
-	var coach model.Coach
-	_ = c.ShouldBindQuery(&coach)
-	if err, recoach := service.GetCoach(coach.ID); err != nil {
+// @Router /Exam/findExam [get]
+func FindExam(c *gin.Context) {
+	var Exam model.Exam
+	_ = c.ShouldBindQuery(&Exam)
+	if err, reExam := service.GetExam(Exam.ID); err != nil {
 		global.GVA_LOG.Error("查询失败!", zap.Any("err", err))
 		response.FailWithMessage("查询失败", c)
 	} else {
-		response.OkWithData(gin.H{"recoach": recoach}, c)
+		response.OkWithData(gin.H{"reExam": reExam}, c)
 	}
 }
 
-// @Tags Coach
-// @Summary 分页获取Coach列表
+// @Tags Exam
+// @Summary 分页获取Exam列表
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body request.CoachSearch true "分页获取Coach列表"
+// @Param data body request.ExamSearch true "分页获取Exam列表"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /coach/getCoachList [get]
-func GetCoachList(c *gin.Context) {
-	var pageInfo request.CoachSearch
+// @Router /Exam/getExamList [get]
+func GetExamList(c *gin.Context) {
+	var pageInfo request.ExamSearch
 	_ = c.ShouldBindQuery(&pageInfo)
-	if err := utils.Verify(pageInfo, utils.PageInfoVerify); err != nil {
-		response.FailWithMessage(err.Error(), c)
-		return
-	}
-	if err, list, total := service.GetCoachInfoList(pageInfo); err != nil {
+	if err, list, total := service.GetExamInfoList(pageInfo); err != nil {
 		global.GVA_LOG.Error("获取失败", zap.Any("err", err))
 		response.FailWithMessage("获取失败", c)
 	} else {

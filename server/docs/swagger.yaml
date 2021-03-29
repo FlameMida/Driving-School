@@ -493,7 +493,7 @@ definitions:
         type: string
       updatedAt:
         type: string
-      userName:
+      username:
         type: string
       uuid:
         type: string
@@ -750,11 +750,11 @@ definitions:
         type: string
       port:
         type: string
-      userName:
+      username:
         type: string
     required:
       - dbName
-      - userName
+      - username
     type: object
   request.Login:
     properties:

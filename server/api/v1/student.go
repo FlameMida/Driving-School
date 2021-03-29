@@ -6,11 +6,33 @@ import (
 	"Driving-school/model/request"
 	"Driving-school/model/response"
 	"Driving-school/service"
+	"Driving-school/utils"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
-//todo uuid 和验证
+// @Tags Student
+// @Summary 设置用户教练
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.SetUserCoach true "用户UUID, 教练ID"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
+// @Router /student/SetUserCoach [post]
+func SetUserCoach(c *gin.Context) {
+	var suc request.SetUserCoach
+	_ = c.ShouldBindJSON(&suc)
+	if UserVerifyErr := utils.Verify(suc, utils.SetUserAuthorityVerify); UserVerifyErr != nil {
+		response.FailWithMessage(UserVerifyErr.Error(), c)
+		return
+	}
+	if err := service.SetUserCoach(suc.UUID, suc.CoachId); err != nil {
+		global.GVA_LOG.Error("修改失败", zap.Any("err", err))
+		response.FailWithMessage("修改失败", c)
+	} else {
+		response.OkWithMessage("修改成功", c)
+	}
+}
 
 // @Tags Student
 // @Summary 创建Student
@@ -21,14 +43,7 @@ import (
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /student/createStudent [post]
 func CreateStudent(c *gin.Context) {
-	var student model.Student
-	_ = c.ShouldBindJSON(&student)
-	if err := service.CreateStudent(student); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
-		response.FailWithMessage("创建失败", c)
-	} else {
-		response.OkWithMessage("创建成功", c)
-	}
+	Register(c)
 }
 
 // @Tags Student

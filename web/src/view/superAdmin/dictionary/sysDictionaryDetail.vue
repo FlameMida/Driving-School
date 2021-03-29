@@ -113,8 +113,8 @@ import {
   updateSysDictionaryDetail,
   findSysDictionaryDetail,
   getSysDictionaryDetailList
-} from "@/api/sysDictionaryDetail"; //  此处请自行替换地址
-import { formatTimeToStr } from "@/utils/date";
+} from "@/api/sysDictionaryDetail";
+import {formatTimeToStr} from "@/utils/date";
 import infoList from "@/mixins/infoList";
 
 export default {
@@ -174,7 +174,7 @@ export default {
     }
   },
   methods: {
-    //条件搜索前端看此方法
+
     onSubmit() {
       this.page = 1;
       this.pageSize = 10;

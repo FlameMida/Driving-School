@@ -37,6 +37,7 @@ func Routers() *gin.Engine {
 		router.InitUserRouter(PrivateGroup)               // 注册用户路由
 		router.InitMenuRouter(PrivateGroup)               // 注册menu路由
 		router.InitStudentRouter(PrivateGroup)            //学员路由
+		router.InitExamRouter(PrivateGroup)               //考试情况路由
 		router.InitCoachRouter(PrivateGroup)              //教练路由
 		router.InitSysOperationRecordRouter(PrivateGroup) // 操作记录
 		router.InitSystemRouter(PrivateGroup)             // system相关路由
@@ -50,8 +51,8 @@ func Routers() *gin.Engine {
 		router.InitSysDictionaryRouter(PrivateGroup)         // 字典管理
 		router.InitSysDictionaryDetailRouter(PrivateGroup)   // 字典详情管理
 		router.InitFileUploadAndDownloadRouter(PrivateGroup) // 文件上传下载功能路由
-		router.InitWorkflowProcessRouter(PrivateGroup)       // 工作流相关接口
-		router.InitExcelRouter(PrivateGroup)                 // 表格导入导出
+
+		router.InitExcelRouter(PrivateGroup) // 表格导入导出
 
 	}
 	global.GVA_LOG.Info("router register success")

@@ -1,6 +1,23 @@
 import service from '@/utils/request'
 
 // @Tags Student
+// @Summary 设置用户教练
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body api.SetUserAuth true "设置用户教练"
+// @Success 200 {string} json "{"success":true,"data":{},"msg":"修改成功"}"
+// @Router /student/setUserCoach [post]
+export const setUserCoach = (data) => {
+    return service({
+        url: "/student/setUserCoach",
+        method: 'post',
+        data: data
+    })
+}
+
+
+// @Tags Student
 // @Summary 创建Student
 // @Security ApiKeyAuth
 // @accept application/json

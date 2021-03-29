@@ -131,7 +131,7 @@ func Register(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-	user := &model.SysUser{Username: R.Username, NickName: R.NickName, Password: R.Password, HeaderImg: R.HeaderImg, AuthorityId: R.AuthorityId}
+	user := &model.SysUser{Username: R.Username, NickName: R.NickName, Password: R.Password, HeaderImg: R.HeaderImg, AuthorityId: R.AuthorityId, Phone: R.Phone}
 	err, userReturn := service.Register(*user)
 	if err != nil {
 		global.GVA_LOG.Error("注册失败", zap.Any("err", err))

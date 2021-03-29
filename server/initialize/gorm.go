@@ -38,8 +38,7 @@ func MysqlTables(db *gorm.DB) {
 		model.SysBaseMenu{},
 		model.SysBaseMenuParameter{},
 		model.JwtBlacklist{},
-		model.Student{},
-		model.Coach{},
+		model.Exam{},
 
 		model.SysDictionary{},
 		model.SysDictionaryDetail{},
@@ -49,7 +48,6 @@ func MysqlTables(db *gorm.DB) {
 		model.ExaSimpleUploader{},
 		model.ExaCustomer{},
 		model.SysOperationRecord{},
-		model.ExaWfLeave{},
 	)
 	if err != nil {
 		global.GVA_LOG.Error("register table failed", zap.Any("err", err))
