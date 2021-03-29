@@ -2,7 +2,7 @@ package request
 
 import "Driving-school/model"
 
-type WorkflowProcessSearch struct {
-	model.WorkflowProcess
+type ExamSearch struct {
+	model.Exam
 	PageInfo
 }

@@ -30,22 +30,22 @@ func IsBlacklist(jwt string) bool {
 
 //@function: GetRedisJWT
 //@description: 从redis取jwt
-//@param: userName string
+//@param: username string
 //@return: err error, redisJWT string
 
-func GetRedisJWT(userName string) (err error, redisJWT string) {
-	redisJWT, err = global.GVA_REDIS.Get(userName).Result()
+func GetRedisJWT(username string) (err error, redisJWT string) {
+	redisJWT, err = global.GVA_REDIS.Get(username).Result()
 	return err, redisJWT
 }
 
 //@function: SetRedisJWT
 //@description: jwt存入redis并设置过期时间
-//@param: userName string
+//@param: username string
 //@return: err error, redisJWT string
 
-func SetRedisJWT(jwt string, userName string) (err error) {
+func SetRedisJWT(jwt string, username string) (err error) {
 	// 此处过期时间等于jwt过期时间
 	timer := time.Duration(global.GVA_CONFIG.JWT.ExpiresTime) * time.Second
-	err = global.GVA_REDIS.Set(userName, jwt, timer).Err()
+	err = global.GVA_REDIS.Set(username, jwt, timer).Err()
 	return err
 }

@@ -32,8 +32,8 @@
            <el-button @click="save" type="primary">保存</el-button>
            <el-button @click="back" type="primary">返回</el-button>
            </el-form-item>
-    </el-form>
-</div>
+        </el-form>
+    </div>
 </template>
 
 <script>
@@ -41,7 +41,7 @@
         create{{.StructName}},
         update{{.StructName}},
         find{{.StructName}}
-    } from "@/api/{{.PackageName}}";  //  此处请自行替换地址
+    } from "@/api/{{.PackageName}}";
     import infoList from "@/mixins/infoList";
 
     export default {

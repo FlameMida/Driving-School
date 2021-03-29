@@ -4414,7 +4414,7 @@ var doc = `{
                 "updatedAt": {
                     "type": "string"
                 },
-                "userName": {
+                "username": {
                     "type": "string"
                 },
                 "uuid": {
@@ -4794,7 +4794,7 @@ var doc = `{
             "type": "object",
             "required": [
                 "dbName",
-                "userName"
+                "username"
             ],
             "properties": {
                 "dbName": {
@@ -4809,7 +4809,7 @@ var doc = `{
                 "port": {
                     "type": "string"
                 },
-                "userName": {
+                "username": {
                     "type": "string"
                 }
             }

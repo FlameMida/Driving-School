@@ -122,13 +122,6 @@ func InitDB(conf request.InitDB) error {
 		model.ExaSimpleUploader{},
 		model.ExaCustomer{},
 		model.SysOperationRecord{},
-		model.WorkflowProcess{},
-		model.WorkflowNode{},
-		model.WorkflowEdge{},
-		model.WorkflowStartPoint{},
-		model.WorkflowEndPoint{},
-		model.WorkflowMove{},
-		model.ExaWfLeave{},
 	)
 	if err != nil {
 		return err
@@ -145,7 +138,7 @@ func InitDB(conf request.InitDB) error {
 		source.DictionaryDetail,
 		source.File,
 		source.BaseMenu,
-		source.Workflow)
+	)
 	if err != nil {
 		return err
 	}

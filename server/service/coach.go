@@ -73,7 +73,7 @@ func GetCoachInfoList(info request.CoachSearch) (err error, list interface{}, to
 	offset := info.PageSize * (info.Page - 1)
 	// 创建db
 	db := global.GVA_DB.Model(&model.Coach{})
-	var coachs []model.Coach
+	var coaches []model.Coach
 	// 如果有条件搜索 下方会自动创建搜索语句
 	db = db.Where("`authority_id` = ? ", "100")
 	if info.NickName != "" {
@@ -83,6 +83,6 @@ func GetCoachInfoList(info request.CoachSearch) (err error, list interface{}, to
 		db = db.Where("`username` LIKE ?", "%"+info.Username+"%")
 	}
 	err = db.Count(&total).Error
-	err = db.Limit(limit).Offset(offset).Find(&coachs).Error
-	return err, coachs, total
+	err = db.Limit(limit).Offset(offset).Find(&coaches).Error
+	return err, coaches, total
 }

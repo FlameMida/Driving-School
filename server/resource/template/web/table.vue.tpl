@@ -122,13 +122,13 @@
 
 <script>
 import {
-    create{{.StructName}},
-    delete{{.StructName}},
-    delete{{.StructName}}ByIds,
-    update{{.StructName}},
-    find{{.StructName}},
-    get{{.StructName}}List
-} from "@/api/{{.PackageName}}";  //  此处请自行替换地址
+create{{.StructName}},
+delete{{.StructName}},
+delete{{.StructName}}ByIds,
+update{{.StructName}},
+find{{.StructName}},
+get{{.StructName}}List
+} from "@/api/{{.PackageName}}";
 import { formatTimeToStr } from "@/utils/date";
 import infoList from "@/mixins/infoList";
 export default {
@@ -137,8 +137,8 @@ export default {
   data() {
     return {
       listApi: get{{ .StructName }}List,
-      dialogFormVisible: false,
-      type: "",
+dialogFormVisible: false,
+type: "",
       deleteVisible: false,
       multipleSelection: [],
 
@@ -187,7 +187,7 @@ export default {
     }
   },
   methods: {
-      //条件搜索前端看此方法
+
       onSubmit() {
         this.page = 1
         this.pageSize = 10

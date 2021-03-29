@@ -4398,8 +4398,8 @@
                 "updatedAt": {
                     "type": "string"
                 },
-                "userName": {
-                    "type": "string"
+                "username": {
+                  "type": "string"
                 },
                 "uuid": {
                     "type": "string"
@@ -4778,7 +4778,7 @@
             "type": "object",
             "required": [
                 "dbName",
-                "userName"
+              "username"
             ],
             "properties": {
                 "dbName": {
@@ -4793,9 +4793,9 @@
                 "port": {
                     "type": "string"
                 },
-                "userName": {
-                    "type": "string"
-                }
+              "username": {
+                "type": "string"
+              }
             }
         },
         "request.Login": {
