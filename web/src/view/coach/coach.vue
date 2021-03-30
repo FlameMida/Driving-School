@@ -57,7 +57,9 @@
           <el-button class="table-button" icon="el-icon-edit" size="small" type="primary"
                      @click="updateCoach(scope.row)">修改
           </el-button>
-          <el-button icon="el-icon-delete" size="mini" type="danger" @click="deleteRow(scope.row)">删除</el-button>
+          <el-button class="table-button" icon="el-icon-delete" size="small" type="danger"
+                     @click="deleteRow(scope.row)">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -150,6 +152,7 @@ export default {
       type: "",
       authOptions: [],
       deleteVisible: false,
+
       multipleSelection: [],
       formData: {
         authorityId: "",

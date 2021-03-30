@@ -59,11 +59,10 @@
       </el-table-column>
 
 
-
       <el-table-column label="入学日期" width="280px">
         <template slot-scope="scope">{{ scope.row.CreatedAt|formatDate }}</template>
       </el-table-column>
-      <el-table-column label="按钮组" min-width="220px">
+      <el-table-column label="按钮组" min-width="320px">
         <template slot-scope="scope">
           <el-button class="table-button" icon="el-icon-edit" size="small" type="primary"
                      @click="updateStudent(scope.row)">修改
@@ -71,7 +70,9 @@
           <el-button class="table-button" icon="el-icon-edit" size="small" type="primary"
                      @click="createExam(scope.row)">新增考试动态
           </el-button>
-          <el-button icon="el-icon-delete" size="mini" type="danger" @click="deleteRow(scope.row)">删除</el-button>
+          <el-button class="table-button" icon="el-icon-delete" size="small" type="danger"
+                     @click="deleteRow(scope.row)">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -145,9 +146,9 @@ import {
   deleteStudentByIds,
   findStudent,
   getStudentList,
+  setUserCoach,
   updateStudent,
-  updateStudentPWD,
-  setUserCoach
+  updateStudentPWD
 } from "@/api/student";
 import {formatTimeToStr} from "@/utils/date";
 import infoList from "@/mixins/infoList";
@@ -200,7 +201,7 @@ export default {
   },
   filters: {
     formatDate: function (time) {
-      if (time != null && time != "") {
+      if (time != null && time !== "") {
         var date = new Date(time);
         return formatTimeToStr(date, "yyyy-MM-dd hh:mm:ss");
       } else {
@@ -216,13 +217,9 @@ export default {
     }
   },
   methods: {
-
     onSubmit() {
       this.page = 1
       this.pageSize = 10
-      if (this.searchInfo.hasServerInfo == "") {
-        this.searchInfo.hasServerInfo = null
-      }
       this.getTableData()
     },
     handleSelectionChange(val) {
@@ -263,8 +260,8 @@ export default {
         }
       });
     },
-    createExam() {
-
+    createExam(row) {
+      this.$router.push({name: 'exam', query: {id: row.ID, open: '1'}})
     },
     setCoachOptions(CoachData, optionsData) {
       CoachData &&

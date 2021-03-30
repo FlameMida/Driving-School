@@ -130,3 +130,25 @@ func GetExamList(c *gin.Context) {
 		}, "获取成功", c)
 	}
 }
+
+// @Tags Exam
+// @Summary 分页某个学员的Exam列表
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.ExamSearch true "分页获取Exam列表"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /Exam/GetExamDetailList [get]
+func GetExamDetailList(c *gin.Context) {
+	var pageInfo request.ExamSearch
+	_ = c.ShouldBindQuery(&pageInfo)
+	if err, list, total := service.GetExamDetailList(pageInfo); err != nil {
+		global.GVA_LOG.Error("获取失败", zap.Any("err", err))
+		response.FailWithMessage("获取失败", c)
+	} else {
+		response.OkWithDetailed(response.PageResult{
+			List:  list,
+			Total: total,
+		}, "获取成功", c)
+	}
+}

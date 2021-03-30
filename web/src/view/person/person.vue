@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="6">
+      <el-col :span="5">
         <div class="fl-left avatar-box">
           <div class="user-card">
             <div
@@ -37,10 +37,10 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="18">
+      <el-col :span="19">
         <div class="user-addcount">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="账号绑定" name="second">
+            <el-tab-pane label="账号绑定" name="first">
               <ul>
                 <li>
                   <p class="title">修改手机号</p>
@@ -58,13 +58,16 @@
                 </li>
               </ul>
             </el-tab-pane>
+
+            <el-tab-pane v-if="isStu" label="考试情况" name="second">
+              <div>
+                <ExamDetail v-if="isStu"/>
+              </div>
+            </el-tab-pane>
           </el-tabs>
         </div>
       </el-col>
 
-      <el-col :span="18">
-
-      </el-col>
     </el-row>
 
 
@@ -106,6 +109,7 @@
 </template>
 <script>
 import ChooseImg from "@/components/chooseImg";
+import ExamDetail from "@/view/student/examDetail";
 import {changePassword, changePhone, setUserInfo} from "@/api/user";
 
 import {mapGetters, mapMutations} from "vuex";
@@ -116,7 +120,8 @@ export default {
   data() {
     return {
       path: path,
-      activeName: "second",
+      isStu: false,
+      activeName: "first",
       showPassword: false,
       showPhone: false,
       pwdModify: {},
@@ -159,7 +164,8 @@ export default {
     };
   },
   components: {
-    ChooseImg
+    ChooseImg,
+    ExamDetail
   },
   computed: {
     ...mapGetters("user", ["userInfo", "token"])
@@ -232,6 +238,10 @@ export default {
     },
     handleClick(tab, event) {
       console.log(tab, event);
+    }
+  }, beforeMount() {
+    if (this.userInfo.authority.authorityId === '200' || this.userInfo.authority.parentId === '200') {
+      this.isStu = true
     }
   }
 };
