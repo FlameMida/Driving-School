@@ -99,3 +99,19 @@ export const getExamList = (params) => {
         params
     })
 }
+
+// @Tags Exam
+// @Summary 分页获取某个学生的Exam列表
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.PageInfo true "分页获取Exam列表"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /Exam/getExamDetailList [get]
+export const getExamDetailList = (params) => {
+    return service({
+        url: "/Exam/getExamDetailList",
+        method: 'get',
+        params
+    })
+}

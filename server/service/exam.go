@@ -4,7 +4,6 @@ import (
 	"Driving-school/global"
 	"Driving-school/model"
 	"Driving-school/model/request"
-	"strconv"
 )
 
 //@function: CreateExam
@@ -70,11 +69,29 @@ func GetExamInfoList(info request.ExamSearch) (err error, list interface{}, tota
 	var Exams []model.Exam
 	// 如果有条件搜索 下方会自动创建搜索语句
 	if info.UserId > 0 {
-		db = db.Where("`user_id` LIKE ?", "%"+strconv.Itoa(int(info.UserId))+"%")
+		db = db.Where("user_id = ?", info.UserId)
 	}
 	if info.Name != "" {
 		db = db.Where("`name` LIKE ?", "%"+info.Name+"%")
 	}
+	err = db.Count(&total).Error
+	err = db.Limit(limit).Offset(offset).Find(&Exams).Error
+
+	return err, Exams, total
+}
+
+//@function: GetExamDetailList
+//@description: 获取某个学员的Exam记录
+//@param: info request.ExamSearch
+//@return: err error, list interface{}, total int64
+
+func GetExamDetailList(info request.ExamSearch) (err error, list interface{}, total int64) {
+	limit := info.PageSize
+	offset := info.PageSize * (info.Page - 1)
+	// 创建db
+	db := global.GVA_DB.Model(&model.Exam{}).Where("user_id = ?", info.UserId)
+	var Exams []model.Exam
+	// 如果有条件搜索 下方会自动创建搜索语句
 	err = db.Count(&total).Error
 	err = db.Limit(limit).Offset(offset).Find(&Exams).Error
 

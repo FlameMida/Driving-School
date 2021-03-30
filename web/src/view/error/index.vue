@@ -3,10 +3,9 @@
         <div class="big">
             <div class="inner">
                 <img src="../../assets/notFound.png">
+                <p>页面不存在哦~</p>
                 <p>页面被神秘力量吸走了，请联系我们修复</p>
                 <p style="font-size:18px;line-height:40px;">菜单未分配仪表盘，可自行修改默认路由</p>
-                <p>↓</p>
-                <img src="#" class="leftPic">
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@
                 :props="{ checkStrictly: true,label:'stuName',value:'stuId',disabled:'disabled',emitPath:false}"
                 :show-all-levels="false"
                 filterable
+                clearable
             ></el-cascader>
           </template>
         </el-form-item>
@@ -45,7 +46,7 @@
     >
       <el-table-column type="selection" width="55"></el-table-column>
 
-      <el-table-column label="学员ID" prop="ID" width="320px"></el-table-column>
+      <el-table-column label="学员ID" prop="userId" width="80px"></el-table-column>
 
       <el-table-column label="学员姓名" width="220px">
         <template slot-scope="scope">
@@ -64,20 +65,25 @@
 
       <el-table-column label="考试结果" prop="result" width="220px"></el-table-column>
 
-      <el-table-column label="考试时间" prop="time" width="220px"></el-table-column>
+      <el-table-column label="考试时间" width="220px">
+        <template slot-scope="scope">{{ scope.row.time|formatDate }}</template>
+      </el-table-column>
 
       <el-table-column label="备注信息" prop="message" width="220px"></el-table-column>
 
 
-      <el-table-column label="按钮组" min-width="220px">
+      <el-table-column label="按钮组" min-width="400px">
         <template slot-scope="scope">
           <el-button class="table-button" icon="el-icon-edit" size="small" type="primary"
-                     @click="checkExam(scope.row)">查看详情
+                     @click="checkExam(scope.row)">查看学员详情
           </el-button>
           <el-button class="table-button" icon="el-icon-edit" size="small" type="primary"
                      @click="updateExam(scope.row)">修改考试信息
           </el-button>
-          <el-button icon="el-icon-delete" size="mini" type="danger" @click="deleteExam(scope.row)">删除</el-button>
+          <el-button class="table-button" icon="el-icon-delete" size="small" type="danger"
+                     @click="deleteExam(scope.row)">删除
+          </el-button>
+
         </template>
       </el-table-column>
     </el-table>
@@ -94,9 +100,17 @@
     ></el-pagination>
 
     <el-dialog :before-close="closeDialog" :title="title" :visible.sync="dialogFormVisible">
-      <el-form ref="userForm" :model="formData" label-position="right" label-width="130px" size="medium">
-        <el-form-item label="学员姓名:" prop="name" required>
-          <!--todo-->
+      <el-form ref="userForm" :model="formData" :rules="rules" label-position="right" label-width="130px" size="medium">
+        <el-form-item label="学员姓名:" prop="userId">
+          <template>
+            <el-cascader
+                v-model="formData.userId"
+                :options="stuOptions"
+                :props="{ checkStrictly: true,label:'stuName',value:'stuId',disabled:'disabled',emitPath:false}"
+                :show-all-levels="false"
+                filterable
+            ></el-cascader>
+          </template>
         </el-form-item>
 
         <el-form-item label="考试名称:" prop="name" required>
@@ -104,7 +118,15 @@
         </el-form-item>
 
         <el-form-item label="考试结果:" prop="result" required>
-          <el-input v-model="formData.result" clearable placeholder="请输入"></el-input>
+          <template>
+            <el-cascader
+                v-model="formData.result"
+                :options="resultOptions"
+                :props="{ checkStrictly: true,label:'result',value:'result',disabled:'disabled',emitPath:false}"
+                :show-all-levels="false"
+                filterable
+            ></el-cascader>
+          </template>
         </el-form-item>
 
         <el-form-item label="备注:" prop="message">
@@ -112,7 +134,8 @@
         </el-form-item>
 
         <el-form-item label="考试时间:" prop="time" required>
-          <el-input v-model="formData.time" clearable placeholder="请输入"></el-input>
+          <el-date-picker v-model="formData.time" placeholder="选择日期" style="width: 100%;"
+                          type="datetime"></el-date-picker>
         </el-form-item>
 
       </el-form>
@@ -126,14 +149,7 @@
 
 <script>
 import infoList from "@/mixins/infoList";
-import {
-  createExam,
-  deleteExam,
-  deleteExamByIds,
-  findExam,
-  getExamList,
-  updateExam,
-} from "@/api/exam";
+import {createExam, deleteExam, deleteExamByIds, findExam, getExamList, updateExam,} from "@/api/exam";
 import {formatTimeToStr} from "@/utils/date";
 import {getStudentList} from "@/api/student";
 
@@ -147,6 +163,7 @@ export default {
       type: "",
       title: "",
       stuOptions: [],
+      resultOptions: [],
       deleteVisible: false,
       multipleSelection: [],
       formData: {
@@ -157,6 +174,21 @@ export default {
         message: "",
         time: "",
       },
+      rules: {
+        userId: [
+          {required: true, message: '请选择学员', trigger: 'blur'}
+        ],
+        name: [
+          {required: true, message: "请输入考试名", trigger: "blur"},
+          {min: 3, message: "最低3位字符", trigger: "blur"}
+        ],
+        result: [
+          {required: true, message: "请选择考试结果", trigger: "blur"},
+        ],
+        time: [
+          {required: true, message: "请选择考试时间", trigger: "blur"}
+        ],
+      }
     };
   },
   filters: {
@@ -173,9 +205,6 @@ export default {
     onSubmit() {
       this.page = 1
       this.pageSize = 10
-      if (this.searchInfo.hasServerInfo === "") {
-        this.searchInfo.hasServerInfo = null
-      }
       this.getTableData()
     },
     handleSelectionChange(val) {
@@ -184,9 +213,10 @@ export default {
     setOptions(stuData) {
       this.stuOptions = [];
       this.setStuOptions(stuData, this.stuOptions);
-    },
-    checkExam() {
 
+    },
+    checkExam(row) {
+      this.$router.push({name: 'examDetail', query: {id: row.userId}})
     },
     setStuOptions(StuData, optionsData) {
       StuData &&
@@ -197,6 +227,23 @@ export default {
         };
         optionsData.push(option);
       });
+      const option1 = {
+        result: "准备考试"
+      };
+      const option2 = {
+        result: "通过考试"
+      };
+      const option3 = {
+        result: "考试失败"
+      };
+      const option4 = {
+        result: "重考",
+        children: [
+          {result: "重考1"},
+          {result: "重考2"},
+        ]
+      };
+      this.resultOptions.push(option1, option2, option3, option4)
     },
     deleteRow(row) {
       this.$confirm('确定要删除吗?', '提示', {
@@ -237,7 +284,7 @@ export default {
       //todo
       const res = await findExam({ID: row.ID});
       this.type = "update";
-      this.title = "修改"
+      this.title = "修改考试情况"
       if (res.code === 0) {
         this.formData = res.data.reExam;
         this.dialogFormVisible = true;
@@ -254,7 +301,6 @@ export default {
         time: "",
       };
     },
-    // todo
     async deleteExam(row) {
       const res = await deleteExam({ID: row.ID});
       if (res.code === 0) {
@@ -265,6 +311,7 @@ export default {
         if (this.tableData.length === 1) {
           this.page--;
         }
+        this.deleteVisible2 = false
         await this.getTableData();
       }
     },
@@ -302,12 +349,16 @@ export default {
     },
     openDialog() {
       this.type = "create";
-      this.title = "新增学员"
-      this.formData.authorityId = '200'
+      this.title = "新增考试情况"
       this.dialogFormVisible = true;
     }
   },
-  async created() {
+
+  async beforeMount() {
+    if (this.$route.query.open === '1') {
+      this.formData.userId = this.$route.query.id
+      this.openDialog()
+    }
     await this.getTableData();
     const stuRes = await getStudentList({page: 1, pageSize: 999});
     this.setOptions(stuRes.data.list);
