@@ -281,7 +281,6 @@ export default {
       }
     },
     async updateExam(row) {
-      //todo
       const res = await findExam({ID: row.ID});
       this.type = "update";
       this.title = "修改考试情况"

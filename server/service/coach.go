@@ -7,16 +7,6 @@ import (
 	"Driving-school/utils"
 )
 
-//@function: CreateCoach
-//@description: 创建Coach记录
-//@param: coach model.Coach
-//@return: err error
-//todo uuid 和验证
-func CreateCoach(coach model.Coach) (err error) {
-	err = global.GVA_DB.Create(&coach).Error
-	return err
-}
-
 //@function: DeleteCoach
 //@description: 删除Coach记录
 //@param: coach model.Coach

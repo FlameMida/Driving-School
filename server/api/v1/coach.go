@@ -11,8 +11,6 @@ import (
 	"go.uber.org/zap"
 )
 
-//todo uuid 和验证
-
 // @Tags Coach
 // @Summary 创建Coach
 // @Security ApiKeyAuth
