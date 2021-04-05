@@ -40,15 +40,16 @@ export default {
         ...mapGetters('user', ['userInfo']),
         avatar(){
             if(this.picSrc === ''){
-                if(this.userInfo.headerImg !== '' && this.userInfo.headerImg.slice(0, 4) === "http"){
-                    return this.userInfo.headerImg
+                if (this.userInfo.headerImg !== '' && this.userInfo.headerImg.slice(0, 4) === "http" || this.userInfo.headerImg.slice(0, 6) === "static") {
+                  return this.userInfo.headerImg
                 }
                 return this.path + this.userInfo.headerImg
-            }else{
-                if(this.picSrc !== '' && this.picSrc.slice(0, 4) === "http"){
-                    return this.picSrc
-                }
-                return this.path + this.picSrc
+            }else {
+              if (this.picSrc !== '' && this.picSrc.slice(0, 4) === "http" || this.picSrc.slice(0, 6) === "static") {
+                console.log(5)
+                return this.picSrc
+              }
+              return this.path + this.picSrc
             }
         },
         file(){
