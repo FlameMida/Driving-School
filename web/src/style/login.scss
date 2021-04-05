@@ -14,9 +14,9 @@
   }
   
   .link-icon {
-    width: 20px;
-    min-width: 20px;
-    height: 20px;
+    width: 30px;
+    min-width: 25px;
+    height: 30px;
     border-radius: 10px;
   }
   
@@ -111,6 +111,14 @@
         padding: 0 20px;
         margin: 40px 0 10px;
         text-align: center;
+
+        .title {
+          color: rgba(0, 0, 0, 0.45);
+          font-size: 14px;
+          padding-right: 40px;
+          margin-bottom: 10px;
+        }
+
         .links {
           margin-bottom: 8px;
           font-size: 14px;
@@ -119,6 +127,7 @@
           flex-direction: row;
           justify-content: space-between;
           padding-right: 40px;
+
           a {
             color: rgba(0, 0, 0, 0.45);
             transition: all 0.3s;
@@ -128,6 +137,7 @@
           color: rgba(0, 0, 0, 0.45);
           font-size: 14px;
           padding-right: 40px;
+          margin-top: 16px
         }
       }
     }

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="top">
         <div class="desc">
-          <img class="logo_login" src="@/assets/logo_login.png" alt="" />
+          <img alt="" class="logo_login" src="@/assets/logo_login.png"/>
         </div>
         <div class="header">
           <a href="/">
@@ -14,35 +14,35 @@
       </div>
       <div class="main">
         <el-form
-          :model="loginForm"
-          :rules="rules"
-          ref="loginForm"
-          @keyup.enter.native="submitForm"
+            ref="loginForm"
+            :model="loginForm"
+            :rules="rules"
+            @keyup.enter.native="submitForm"
         >
           <el-form-item prop="username">
             <el-input placeholder="请输入用户名" v-model="loginForm.username">
               <i class="el-input__icon el-icon-user" slot="suffix"></i
-            ></el-input>
+              ></el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input
-              :type="lock === 'lock' ? 'password' : 'text'"
-              placeholder="请输入密码"
-              v-model="loginForm.password"
+                v-model="loginForm.password"
+                :type="lock === 'lock' ? 'password' : 'text'"
+                placeholder="请输入密码"
             >
               <i
-                :class="'el-input__icon el-icon-' + lock"
-                @click="changeLock"
-                slot="suffix"
+                  slot="suffix"
+                  :class="'el-input__icon el-icon-' + lock"
+                  @click="changeLock"
               ></i>
             </el-input>
           </el-form-item>
           <el-form-item style="position: relative">
             <el-input
-              v-model="loginForm.captcha"
-              name="logVerify"
-              placeholder="请输入验证码"
-              style="width: 60%"
+                v-model="loginForm.captcha"
+                name="logVerify"
+                placeholder="请输入验证码"
+                style="width: 60%"
             />
             <div class="vPic">
               <img
@@ -57,26 +57,28 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm" style="width: 100%"
-              >登 录</el-button
+            >登 录
+            </el-button
             >
           </el-form-item>
         </el-form>
       </div>
 
       <div class="footer">
+        <div class="title">个人空间</div>
         <div class="links">
-          <a href="https://github.com/Flamemida"
-          ><img src="@/assets/docs.png" class="link-icon"
-          /></a>
-          <a href="https://www.yuque.com/FlameMida/"
-            ><img src="@/assets/yuque.png" class="link-icon"
-          /></a>
-          <a href="https://github.com/Flamemida"
-          ><img src="@/assets/github.png" class="link-icon"
-          /></a>
-          <a href="https://space.bilibili.com/106948903"
-          ><img src="@/assets/video.png" class="link-icon"
-          /></a>
+          <a href="https://gitee.com/FlameMida" target="_blank">
+            <img class="link-icon" src="@/assets/gitee.png"/>
+          </a>
+          <a href="https://www.yuque.com/FlameMida/" target="_blank">
+            <img class="link-icon" src="@/assets/yuque.png"/>
+          </a>
+          <a href="https://github.com/Flamemida" target="_blank">
+            <img class="link-icon" src="@/assets/github.png"/>
+          </a>
+          <a href="https://space.bilibili.com/106948903" target="_blank">
+            <img class="link-icon" src="@/assets/bilibili.png"/>
+          </a>
         </div>
         <div class="copyright">
           Copyright &copy; {{ curYear }} 💖 FlameMida
@@ -87,8 +89,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { captcha } from "@/api/user";
+import {mapActions} from "vuex";
+import {captcha} from "@/api/user";
+
 export default {
   name: "Login",
   data() {
@@ -116,8 +119,8 @@ export default {
         captchaId: "",
       },
       rules: {
-        username: [{ validator: checkUsername, trigger: "blur" }],
-        password: [{ validator: checkPassword, trigger: "blur" }],
+        username: [{validator: checkUsername, trigger: "blur"}],
+        password: [{validator: checkPassword, trigger: "blur"}],
       },
       logVerify: "",
       picPath: "",
