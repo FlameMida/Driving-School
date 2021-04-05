@@ -28,7 +28,7 @@
           <div class="car-right">
             <el-row>
               <el-col :span="6">
-                <el-card shadow="hover">
+                <el-card shadow="hover" style="min-width: 140px">
                   <div class="car-item">
                     <span class="flow"><i class="el-icon-s-grid"></i></span>
                     <span>今日流量：</span>
@@ -38,7 +38,7 @@
               </el-col>
 
               <el-col :span="6">
-                <el-card shadow="hover">
+                <el-card shadow="hover" style="min-width: 140px">
                   <div class="car-item">
                   <span class="user-number">
                     <i class="el-icon-s-custom"></i>
@@ -49,7 +49,7 @@
                 </el-card>
               </el-col>
               <el-col :span="6">
-                <el-card shadow="hover">
+                <el-card shadow="hover" style="min-width: 140px">
                   <div class="car-item">
                   <span class="feedback">
                     <i class="el-icon-s-custom"></i>
@@ -60,7 +60,7 @@
                 </el-card>
               </el-col>
               <el-col :span="6">
-                <el-card shadow="hover">
+                <el-card shadow="hover" style="min-width: 140px">
                   <div class="car-item">
                   <span class="feedback">
                     <i class="el-icon-s-custom"></i>

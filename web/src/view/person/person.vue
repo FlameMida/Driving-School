@@ -5,7 +5,7 @@
         <div class="fl-left avatar-box">
           <div class="user-card">
             <div
-                :style="{ 'background-image': `url(${(userInfo.headerImg && userInfo.headerImg.slice(0, 4) !== 'http')?path+userInfo.headerImg:userInfo.headerImg})`,'background-repeat':'no-repeat','background-size':'cover' }"
+                :style="{ 'background-image': `url(${userInfo.headerImg})`,'background-repeat':'no-repeat','background-size':'cover' }"
                 class="user-headpic-update">
               <span class="update" @click="openChooseImg">
                 <i class="el-icon-edit"></i>
