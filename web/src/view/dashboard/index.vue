@@ -185,9 +185,9 @@ export default {
           color: "#ff85c0",
         },
         {
-          label: "关于驾校",
+          label: "考试情况",
           icon: "el-icon el-icon-user",
-          name: "about",
+          name: "exam",
           color: "#5cdbd3",
         },
       ],
