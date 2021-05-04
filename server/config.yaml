@@ -44,7 +44,7 @@ system:
   oss-type: local
   use-multipoint: true
 weather:
-  app-key: 712b2beeefce88cbf02710a81b5013bb
+  app-key: 
   lang: zh_cn
   lat: "23.4155"
   log: "113.0968"
