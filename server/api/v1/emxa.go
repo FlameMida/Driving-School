@@ -15,11 +15,11 @@ import (
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Exam true "创建考试情况"
+// @Param data body model.SysExam true "创建考试情况"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /Exam/createExam [post]
 func CreateExam(c *gin.Context) {
-	var Exam model.Exam
+	var Exam model.SysExam
 	_ = c.ShouldBindJSON(&Exam)
 	if err := service.CreateExam(Exam); err != nil {
 		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
@@ -34,11 +34,11 @@ func CreateExam(c *gin.Context) {
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Exam true "删除Exam"
+// @Param data body model.SysExam true "删除Exam"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
 // @Router /Exam/deleteExam [delete]
 func DeleteExam(c *gin.Context) {
-	var Exam model.Exam
+	var Exam model.SysExam
 	_ = c.ShouldBindJSON(&Exam)
 	if err := service.DeleteExam(Exam); err != nil {
 		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
@@ -72,12 +72,12 @@ func DeleteExamByIds(c *gin.Context) {
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Exam true "更新Exam"
+// @Param data body model.SysExam true "更新Exam"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
 // @Router /Exam/updateExam [put]
 func UpdateExam(c *gin.Context) {
 	var (
-		Exam model.Exam
+		Exam model.SysExam
 	)
 	_ = c.ShouldBindJSON(&Exam)
 	if err := service.UpdateExam(Exam); err != nil {
@@ -93,11 +93,11 @@ func UpdateExam(c *gin.Context) {
 // @Security ApiKeyAuth
 // @accept application/json
 // @Produce application/json
-// @Param data body model.Exam true "用id查询Exam"
+// @Param data body model.SysExam true "用id查询Exam"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"查询成功"}"
 // @Router /Exam/findExam [get]
 func FindExam(c *gin.Context) {
-	var Exam model.Exam
+	var Exam model.SysExam
 	_ = c.ShouldBindQuery(&Exam)
 	if err, reExam := service.GetExam(Exam.ID); err != nil {
 		global.GVA_LOG.Error("查询失败!", zap.Any("err", err))
@@ -107,7 +107,7 @@ func FindExam(c *gin.Context) {
 	}
 }
 
-// @Tags Exam
+// GetExamList @Tags Exam
 // @Summary 分页获取Exam列表
 // @Security ApiKeyAuth
 // @accept application/json
