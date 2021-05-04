@@ -132,7 +132,6 @@ func InitDB(conf request.InitDB) error {
 		source.DataAuthorities,
 		source.Dictionary,
 		source.DictionaryDetail,
-		source.File,
 		source.BaseMenu,
 	)
 	if err != nil {
