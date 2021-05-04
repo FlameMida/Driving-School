@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Exam struct {
+type SysExam struct {
 	global.GVA_MODEL
 	UserId  uint      `json:"userId" form:"userId"`
 	Name    string    `json:"name" form:"name"`

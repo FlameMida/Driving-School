@@ -40,13 +40,10 @@ var apis = []model.SysApi{
 	{global.GVA_MODEL{ID: 20, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/menu/getBaseMenuById", "根据id获取菜单", "menu", "POST"},
 
 	{global.GVA_MODEL{ID: 21, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/changePassword", "修改密码", "user", "POST"},
-	{global.GVA_MODEL{ID: 21, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/changePasswordAdmin", "强制修改密码", "user", "PUT"},
-	{global.GVA_MODEL{ID: 22, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/changePhone", "修改手机号", "user", "POST"},
-	{global.GVA_MODEL{ID: 23, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/getUserList", "获取用户列表", "user", "POST"},
-	{global.GVA_MODEL{ID: 24, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/setUserAuthority", "修改用户角色", "user", "POST"},
-
-	{global.GVA_MODEL{ID: 25, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/fileUploadAndDownload/upload", "文件上传示例", "fileUploadAndDownload", "POST"},
-	{global.GVA_MODEL{ID: 26, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/fileUploadAndDownload/getFileList", "获取上传文件列表", "fileUploadAndDownload", "POST"},
+	{global.GVA_MODEL{ID: 22, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/changePasswordAdmin", "强制修改密码", "user", "PUT"},
+	{global.GVA_MODEL{ID: 23, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/changePhone", "修改手机号", "user", "POST"},
+	{global.GVA_MODEL{ID: 24, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/getUserList", "获取用户列表", "user", "POST"},
+	{global.GVA_MODEL{ID: 25, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/user/setUserAuthority", "修改用户角色", "user", "POST"},
 
 	{global.GVA_MODEL{ID: 27, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/casbin/updateCasbin", "更改角色api权限", "casbin", "POST"},
 	{global.GVA_MODEL{ID: 28, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/casbin/getPolicyPathByAuthorityId", "获取权限列表", "casbin", "POST"},
@@ -119,6 +116,14 @@ var apis = []model.SysApi{
 	{global.GVA_MODEL{ID: 95, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/coach/updateCoach", "更新Coach", "coach", "PUT"},
 	{global.GVA_MODEL{ID: 96, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/coach/findCoach", "根据ID获取Coach", "coach", "GET"},
 	{global.GVA_MODEL{ID: 97, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/coach/getCoachList", "获取Coach列表", "coach", "GET"},
+
+	{global.GVA_MODEL{ID: 98, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/Exam/createExam", "新建Exam", "exam", "POST"},
+	{global.GVA_MODEL{ID: 99, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/Exam/deleteExam", "删除Exam", "exam", "DELETE"},
+	{global.GVA_MODEL{ID: 100, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/Exam/deleteExamByIds", "批量删除Exam", "exam", "DELETE"},
+	{global.GVA_MODEL{ID: 101, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/Exam/updateExam", "更新Exam", "exam", "PUT"},
+	{global.GVA_MODEL{ID: 102, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/Exam/findExam", "根据ID获取Exam", "exam", "GET"},
+	{global.GVA_MODEL{ID: 103, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/Exam/getExamList", "获取Exam列表", "exam", "GET"},
+	{global.GVA_MODEL{ID: 104, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "/Exam/getExamDetailList", "获取某个学员的Exam列表", "exam", "GET"},
 }
 
 //@description: sys_apis 表数据初始化
