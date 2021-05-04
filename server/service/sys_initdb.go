@@ -116,11 +116,7 @@ func InitDB(conf request.InitDB) error {
 		model.JwtBlacklist{},
 		model.SysDictionary{},
 		model.SysDictionaryDetail{},
-		model.ExaFileUploadAndDownload{},
-		model.ExaFile{},
-		model.ExaFileChunk{},
-		model.ExaSimpleUploader{},
-		model.ExaCustomer{},
+		model.SysExam{},
 		model.SysOperationRecord{},
 	)
 	if err != nil {
